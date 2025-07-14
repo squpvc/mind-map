@@ -10,14 +10,14 @@ const SIMPLE_MIND_MAP_LOCAL_CONFIG = 'SIMPLE_MIND_MAP_LOCAL_CONFIG'
 
 let mindMapData = null
 
-// 获取缓存的思维导图数据
+// Get cached mind map data
 export const getData = () => {
-  // 接管模式
+  // Takeover mode
   if (window.takeOverApp) {
     mindMapData = window.takeOverAppMethods.getMindMapData()
     return mindMapData
   }
-  // 操作本地文件模式
+  // Local file operation mode
   if (vuexStore.state.isHandleLocalFile) {
     return Vue.prototype.getCurrentData()
   }
@@ -33,7 +33,7 @@ export const getData = () => {
   }
 }
 
-// 存储思维导图数据
+// Store mind map data
 export const storeData = data => {
   try {
     let originData = null
@@ -67,7 +67,7 @@ export const storeData = data => {
   }
 }
 
-// 获取思维导图配置数据
+// Get mind map configuration data
 export const getConfig = () => {
   if (window.takeOverApp) {
     window.takeOverAppMethods.getMindMapConfig()
@@ -80,7 +80,7 @@ export const getConfig = () => {
   return null
 }
 
-// 存储思维导图配置数据
+// Store mind map configuration data
 export const storeConfig = config => {
   try {
     if (window.takeOverApp) {
@@ -93,7 +93,7 @@ export const storeConfig = config => {
   }
 }
 
-// 存储语言
+// Store language
 export const storeLang = lang => {
   if (window.takeOverApp) {
     window.takeOverAppMethods.saveLanguage(lang)
@@ -102,7 +102,7 @@ export const storeLang = lang => {
   localStorage.setItem(SIMPLE_MIND_MAP_LANG, lang)
 }
 
-// 获取存储的语言
+// Get stored language
 export const getLang = () => {
   if (window.takeOverApp) {
     return window.takeOverAppMethods.getLanguage() || 'en'
@@ -115,7 +115,7 @@ export const getLang = () => {
   return 'en'
 }
 
-// 存储本地配置
+// Store local configuration
 export const storeLocalConfig = config => {
   if (window.takeOverApp) {
     return window.takeOverAppMethods.saveLocalConfig(config)
@@ -123,7 +123,7 @@ export const storeLocalConfig = config => {
   localStorage.setItem(SIMPLE_MIND_MAP_LOCAL_CONFIG, JSON.stringify(config))
 }
 
-// 获取本地配置
+// Get local configuration
 export const getLocalConfig = () => {
   if (window.takeOverApp) {
     return window.takeOverAppMethods.getLocalConfig()

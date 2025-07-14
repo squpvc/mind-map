@@ -284,7 +284,7 @@
   </el-dialog>
 </template>
 
-<script lang="ts">
+<script>
 import { mapState, mapMutations } from 'vuex'
 import { 
   AI_PROVIDERS, 
@@ -326,54 +326,62 @@ export default {
         timeout: 60
       },
       providerNames: AI_PROVIDER_NAMES,
-      providerDocs: {
-        [AI_PROVIDERS.OPENAI]: '[https://platform.openai.com/docs/api-reference'](https://platform.openai.com/docs/api-reference'),
-        [AI_PROVIDERS.ANTHROPIC]: '[https://docs.anthropic.com/claude/reference'](https://docs.anthropic.com/claude/reference'),
-        [AI_PROVIDERS.DEEPSEEK]: '[https://platform.deepseek.com/docs'](https://platform.deepseek.com/docs'),
-        [AI_PROVIDERS.GOOGLE]: '[https://ai.google.dev/api/rest'](https://ai.google.dev/api/rest'),
-        [AI_PROVIDERS.MISTRAL]: '[https://docs.mistral.ai/'](https://docs.mistral.ai/'),
-        [AI_PROVIDERS.COHERE]: '[https://docs.cohere.com/reference'](https://docs.cohere.com/reference'),
-        [AI_PROVIDERS.VOLCANO]: '[https://www.volcengine.com/docs/82379'](https://www.volcengine.com/docs/82379'),
-        [AI_PROVIDERS.GROQ]: '[https://console.groq.com/docs/introduction'](https://console.groq.com/docs/introduction'),
-        [AI_PROVIDERS.OLLAMA]: '[https://github.com/ollama/ollama'](https://github.com/ollama/ollama'),
-        [AI_PROVIDERS.LM_STUDIO]: '[https://lmstudio.ai/docs'](https://lmstudio.ai/docs'),
-        [AI_PROVIDERS.TOGETHER]: '[https://docs.together.ai/reference'](https://docs.together.ai/reference'),
-        [AI_PROVIDERS.PERPLEXITY]: '[https://docs.perplexity.ai/'](https://docs.perplexity.ai/'),
-        [AI_PROVIDERS.OPENROUTER]: '[https://openrouter.ai/docs'](https://openrouter.ai/docs'),
-        [AI_PROVIDERS.AZURE]: '[https://learn.microsoft.com/en-us/azure/ai-services/openai/'](https://learn.microsoft.com/en-us/azure/ai-services/openai/'),
-        [AI_PROVIDERS.AWS]: '[https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html'](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html')
-      },
-      providerApiKeyHelp: {
-        [AI_PROVIDERS.OPENAI]: 'Find your API key at [https://platform.openai.com/api-keys'](https://platform.openai.com/api-keys'),
-        [AI_PROVIDERS.ANTHROPIC]: 'Find your API key at [https://console.anthropic.com/settings/keys'](https://console.anthropic.com/settings/keys'),
-        [AI_PROVIDERS.DEEPSEEK]: 'Find your API key at [https://platform.deepseek.com/account/api-keys'](https://platform.deepseek.com/account/api-keys'),
-        [AI_PROVIDERS.GOOGLE]: 'Get your API key from Google AI Studio',
-        [AI_PROVIDERS.MISTRAL]: 'Find your API key at [https://console.mistral.ai/api-keys/'](https://console.mistral.ai/api-keys/'),
-        [AI_PROVIDERS.COHERE]: 'Find your API key at [https://dashboard.cohere.com/api-keys'](https://dashboard.cohere.com/api-keys'),
-        [AI_PROVIDERS.GROQ]: 'Find your API key at [https://console.groq.com/keys'](https://console.groq.com/keys'),
-        [AI_PROVIDERS.OPENROUTER]: 'Find your API key at [https://openrouter.ai/keys'](https://openrouter.ai/keys'),
-        [AI_PROVIDERS.PERPLEXITY]: 'Find your API key at [https://perplexity.ai/settings/api'](https://perplexity.ai/settings/api'),
-        [AI_PROVIDERS.AZURE]: 'Find your API key in the Azure Portal',
-        [AI_PROVIDERS.AWS]: 'Configure AWS credentials with proper Bedrock permissions'
-      },
-      providerHelpText: {
-        [AI_PROVIDERS.OLLAMA]: this.$t('ai.ollamaHelpText'),
-        [AI_PROVIDERS.LM_STUDIO]: this.$t('ai.lmStudioHelpText'),
-        [AI_PROVIDERS.OPENROUTER]: this.$t('ai.openRouterHelpText')
-      },
-      defaultBaseUrls: {
-        [AI_PROVIDERS.OPENAI]: '[https://api.openai.com/v1'](https://api.openai.com/v1'),
-        [AI_PROVIDERS.ANTHROPIC]: '[https://api.anthropic.com/v1'](https://api.anthropic.com/v1'),
-        [AI_PROVIDERS.DEEPSEEK]: '[https://api.deepseek.com/v1'](https://api.deepseek.com/v1'),
-        [AI_PROVIDERS.MISTRAL]: '[https://api.mistral.ai/v1'](https://api.mistral.ai/v1'),
-        [AI_PROVIDERS.COHERE]: '[https://api.cohere.ai/v1'](https://api.cohere.ai/v1'),
-        [AI_PROVIDERS.OLLAMA]: 'http://localhost:11434/v1',
-        [AI_PROVIDERS.LM_STUDIO]: 'http://localhost:1234/v1',
-        [AI_PROVIDERS.TOGETHER]: '[https://api.together.xyz/v1'](https://api.together.xyz/v1'),
-        [AI_PROVIDERS.OPENROUTER]: '[https://openrouter.ai/api/v1'](https://openrouter.ai/api/v1'),
-        [AI_PROVIDERS.PERPLEXITY]: '[https://api.perplexity.ai](https://api.perplexity.ai)',
-        [AI_PROVIDERS.AZURE]: 'https://{your-resource-name}.openai.azure.com/openai/deployments/{deployment-id}'
-      },
+      providerDocs: (function() {
+        var docs = {};
+        docs[AI_PROVIDERS.OPENAI] = 'https://platform.openai.com/docs/api-reference';
+        docs[AI_PROVIDERS.ANTHROPIC] = 'https://docs.anthropic.com/claude/reference';
+        docs[AI_PROVIDERS.DEEPSEEK] = 'https://platform.deepseek.com/docs';
+        docs[AI_PROVIDERS.GOOGLE] = 'https://ai.google.dev/api/rest';
+        docs[AI_PROVIDERS.MISTRAL] = 'https://docs.mistral.ai/';
+        docs[AI_PROVIDERS.COHERE] = 'https://docs.cohere.com/reference';
+        docs[AI_PROVIDERS.VOLCANO] = 'https://www.volcengine.com/docs/82379';
+        docs[AI_PROVIDERS.GROQ] = 'https://console.groq.com/docs/introduction';
+        docs[AI_PROVIDERS.OLLAMA] = 'https://github.com/ollama/ollama';
+        docs[AI_PROVIDERS.LM_STUDIO] = 'https://lmstudio.ai/docs';
+        docs[AI_PROVIDERS.TOGETHER] = 'https://docs.together.ai/reference';
+        docs[AI_PROVIDERS.PERPLEXITY] = 'https://docs.perplexity.ai/';
+        docs[AI_PROVIDERS.OPENROUTER] = 'https://openrouter.ai/docs';
+        docs[AI_PROVIDERS.AZURE] = 'https://learn.microsoft.com/en-us/azure/ai-services/openai/';
+        docs[AI_PROVIDERS.AWS] = 'https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html';
+        return docs;
+      })(),
+      providerApiKeyHelp: (function() {
+        var help = {};
+        help[AI_PROVIDERS.OPENAI] = 'Find your API key at https://platform.openai.com/api-keys';
+        help[AI_PROVIDERS.ANTHROPIC] = 'Find your API key at https://console.anthropic.com/settings/keys';
+        help[AI_PROVIDERS.DEEPSEEK] = 'Find your API key at https://platform.deepseek.com/account/api-keys';
+        help[AI_PROVIDERS.GOOGLE] = 'Get your API key from Google AI Studio';
+        help[AI_PROVIDERS.MISTRAL] = 'Find your API key at https://console.mistral.ai/api-keys/';
+        help[AI_PROVIDERS.COHERE] = 'Find your API key at https://dashboard.cohere.com/api-keys';
+        help[AI_PROVIDERS.GROQ] = 'Find your API key at https://console.groq.com/keys';
+        help[AI_PROVIDERS.OPENROUTER] = 'Find your API key at https://openrouter.ai/keys';
+        help[AI_PROVIDERS.PERPLEXITY] = 'Find your API key at https://perplexity.ai/settings/api';
+        help[AI_PROVIDERS.AZURE] = 'Find your API key in the Azure Portal';
+        help[AI_PROVIDERS.AWS] = 'Configure AWS credentials with proper Bedrock permissions';
+        return help;
+      })(),
+      providerHelpText: (function(vm) {
+        var texts = {};
+        texts[AI_PROVIDERS.OLLAMA] = vm.$t('ai.ollamaHelpText');
+        texts[AI_PROVIDERS.LM_STUDIO] = vm.$t('ai.lmStudioHelpText');
+        texts[AI_PROVIDERS.OPENROUTER] = vm.$t('ai.openRouterHelpText');
+        return texts;
+      })(this),
+      defaultBaseUrls: (function() {
+        var urls = {};
+        urls[AI_PROVIDERS.OPENAI] = 'https://api.openai.com/v1';
+        urls[AI_PROVIDERS.ANTHROPIC] = 'https://api.anthropic.com/v1';
+        urls[AI_PROVIDERS.DEEPSEEK] = 'https://api.deepseek.com/v1';
+        urls[AI_PROVIDERS.MISTRAL] = 'https://api.mistral.ai/v1';
+        urls[AI_PROVIDERS.COHERE] = 'https://api.cohere.ai/v1';
+        urls[AI_PROVIDERS.OLLAMA] = 'http://localhost:11434/v1';
+        urls[AI_PROVIDERS.LM_STUDIO] = 'http://localhost:1234/v1';
+        urls[AI_PROVIDERS.TOGETHER] = 'https://api.together.xyz/v1';
+        urls[AI_PROVIDERS.OPENROUTER] = 'https://openrouter.ai/api/v1';
+        urls[AI_PROVIDERS.PERPLEXITY] = 'https://api.perplexity.ai';
+        urls[AI_PROVIDERS.AZURE] = 'https://{your-resource-name}.openai.azure.com/openai/deployments/{deployment-id}';
+        return urls;
+      })(),
       temperatureMarks: {
         0: '0',
         0.5: '0.5',
@@ -401,90 +409,91 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapState(['aiConfig']),
-    availableModels() {
-      return AI_MODELS[this.ruleForm.provider] || []
-    },
-    currentProviderName() {
-      return this.providerNames[this.ruleForm.provider] || this.ruleForm.provider
-    },
-    currentProviderDocs() {
-      return this.providerDocs[this.ruleForm.provider]
-    },
-    showApiKeyField() {
-      return ![
-        AI_PROVIDERS.OLLAMA,
-        AI_PROVIDERS.LM_STUDIO
-      ].includes(this.ruleForm.provider)
-    },
-    showBaseUrlField() {
-      return [
-        AI_PROVIDERS.OPENAI,
-        AI_PROVIDERS.ANTHROPIC,
-        AI_PROVIDERS.DEEPSEEK,
-        AI_PROVIDERS.MISTRAL,
-        AI_PROVIDERS.COHERE,
-        AI_PROVIDERS.OLLAMA,
-        AI_PROVIDERS.LM_STUDIO,
-        AI_PROVIDERS.TOGETHER,
-        AI_PROVIDERS.OPENROUTER,
-        AI_PROVIDERS.PERPLEXITY
-      ].includes(this.ruleForm.provider)
-    },
-    requiresBaseUrl() {
-      return [
-        AI_PROVIDERS.OLLAMA,
-        AI_PROVIDERS.LM_STUDIO
-      ].includes(this.ruleForm.provider)
-    },
-    showModelSelection() {
-      return this.availableModels && this.availableModels.length > 0
-    },
-    showCustomModelInput() {
-      return [
-        AI_PROVIDERS.OLLAMA,
-        AI_PROVIDERS.LM_STUDIO
-      ].includes(this.ruleForm.provider)
-    },
-    maxMaxTokens() {
-      // Some models support larger context windows
-      return this.ruleForm.provider === AI_PROVIDERS.ANTHROPIC ? 100000 : 4000
-    },
-    isFormValid() {
-      if (!this.ruleForm.provider) return false
-      if (this.showApiKeyField && !this.ruleForm.apiKey) return false
-      if (this.requiresBaseUrl && !this.ruleForm.baseUrl) return false
-      if (this.ruleForm.provider === AI_PROVIDERS.AZURE && 
-          (!this.ruleForm.apiVersion || !this.ruleForm.deploymentId)) {
-        return false
+  computed: Object.assign({},
+    mapState(['aiConfig']), {
+      availableModels: function() {
+        return AI_MODELS[this.ruleForm.provider] || [];
+      },
+      currentProviderName: function() {
+        return this.providerNames[this.ruleForm.provider] || this.ruleForm.provider;
+      },
+      currentProviderDocs: function() {
+        return this.providerDocs[this.ruleForm.provider];
+      },
+      showApiKeyField: function() {
+        return ![
+          AI_PROVIDERS.OLLAMA,
+          AI_PROVIDERS.LM_STUDIO
+        ].includes(this.ruleForm.provider);
+      },
+      showBaseUrlField: function() {
+        return [
+          AI_PROVIDERS.OPENAI,
+          AI_PROVIDERS.ANTHROPIC,
+          AI_PROVIDERS.DEEPSEEK,
+          AI_PROVIDERS.MISTRAL,
+          AI_PROVIDERS.COHERE,
+          AI_PROVIDERS.OLLAMA,
+          AI_PROVIDERS.LM_STUDIO,
+          AI_PROVIDERS.TOGETHER,
+          AI_PROVIDERS.OPENROUTER,
+          AI_PROVIDERS.PERPLEXITY
+        ].includes(this.ruleForm.provider);
+      },
+      requiresBaseUrl: function() {
+        return [
+          AI_PROVIDERS.OLLAMA,
+          AI_PROVIDERS.LM_STUDIO
+        ].includes(this.ruleForm.provider);
+      },
+      showModelSelection: function() {
+        return this.availableModels && this.availableModels.length > 0;
+      },
+      showCustomModelInput: function() {
+        return [
+          AI_PROVIDERS.OLLAMA,
+          AI_PROVIDERS.LM_STUDIO
+        ].includes(this.ruleForm.provider);
+      },
+      maxMaxTokens: function() {
+        // Some models support larger context windows
+        return this.ruleForm.provider === AI_PROVIDERS.ANTHROPIC ? 100000 : 4000;
+      },
+      isFormValid: function() {
+        if (!this.ruleForm.provider) return false;
+        if (this.showApiKeyField && !this.ruleForm.apiKey) return false;
+        if (this.requiresBaseUrl && !this.ruleForm.baseUrl) return false;
+        if (this.ruleForm.provider === AI_PROVIDERS.AZURE && 
+            (!this.ruleForm.apiVersion || !this.ruleForm.deploymentId)) {
+          return false;
+        }
+        return true;
       }
-      return true
     }
-  },
+  ),
   watch: {
-    visible(val) {
-      this.aiConfigDialogVisible = val
+    visible: function(val) {
+      this.aiConfigDialogVisible = val;
     },
-    aiConfigDialogVisible(val, oldVal) {
+    aiConfigDialogVisible: function(val, oldVal) {
       if (!val && oldVal) {
-        this.close()
+        this.close();
       } else if (val) {
-        this.initFormData()
+        this.initFormData();
       }
     },
-    'ruleForm.provider'() {
+    'ruleForm.provider': function() {
       // Reset model when provider changes
-      this.ruleForm.model = this.availableModels[0]?.id || ''
+      this.ruleForm.model = (this.availableModels[0] && this.availableModels[0].id) || '';
       
       // Set default base URL for the provider if not set
       if (this.showBaseUrlField && !this.ruleForm.baseUrl) {
-        this.ruleForm.baseUrl = this.defaultBaseUrls[this.ruleForm.provider] || ''
+        this.ruleForm.baseUrl = this.defaultBaseUrls[this.ruleForm.provider] || '';
       }
     }
   },
-  created() {
-    this.initFormData()
+  created: function() {
+    this.initFormData();
   },
   methods: {
     ...mapMutations(['setLocalConfig']),
@@ -519,7 +528,7 @@ export default {
         baseUrl: baseUrl || this.defaultBaseUrls[provider] || '',
         apiVersion,
         deploymentId,
-        model: model || this.availableModels[0]?.id || '',
+        model: model || (this.availableModels[0] && this.availableModels[0].id) || '',
         customModel,
         temperature: parseFloat(temperature),
         maxTokens: parseInt(maxTokens),
@@ -560,7 +569,7 @@ export default {
           ...this.ruleForm,
           // Ensure we don't save undefined values
           apiKey: this.ruleForm.apiKey || '',
-          model: this.ruleForm.model || this.availableModels[0]?.id || '',
+          model: this.ruleForm.model || (this.availableModels[0] && this.availableModels[0].id) || '',
           baseUrl: this.ruleForm.baseUrl || this.defaultBaseUrls[this.ruleForm.provider] || '',
           // Clean up empty values
           ...(this.ruleForm.apiVersion ? { apiVersion: this.ruleForm.apiVersion } : {}),
