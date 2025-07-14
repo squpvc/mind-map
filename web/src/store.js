@@ -6,97 +6,157 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    isHandleLocalFile: false, // 是否操作的是本地文件
+    isHandleLocalFile: false, // Whether operating on a local file
     localConfig: {
-      // 本地配置
-      isZenMode: false, // 是否是禅模式
-      // 是否开启节点富文本
+      // Local configuration
+      isZenMode: false, // Whether in zen mode
+      // Whether to enable rich text for nodes
       openNodeRichText: true,
-      // 鼠标行为
+      // Mouse behavior
       useLeftKeySelectionRightKeyDrag: false,
-      // 是否显示滚动条
+      // Whether to show scrollbar
       isShowScrollbar: false,
-      // 是否是暗黑模式
+      // Whether in dark mode
       isDark: false,
-      // 是否开启AI功能
+      // Whether to enable AI features
       enableAi: true
     },
-    activeSidebar: '', // 当前显示的侧边栏
-    isOutlineEdit: false, // 是否是大纲编辑模式
-    isReadonly: false, // 是否只读
-    isSourceCodeEdit: false, // 是否是源码编辑模式
-    extraTextOnExport: '', // 导出时底部添加的文字
-    isDragOutlineTreeNode: false, // 当前是否正在拖拽大纲树的节点
+    activeSidebar: '', // Currently displayed sidebar
+    isOutlineEdit: false, // Whether in outline edit mode
+    isReadonly: false, // Whether read-only
+    isSourceCodeEdit: false, // Whether in source code edit mode
+    extraTextOnExport: '', // Text added at the bottom when exporting
+    isDragOutlineTreeNode: false, // Whether currently dragging a node in the outline tree
     aiConfig: {
-      api: 'http://ark.cn-beijing.volces.com/api/v3/chat/completions',
-      key: '',
+      // Provider can be 'volcano', 'openai', or 'deepseek'
+      provider: 'volcano',
+      // Common settings
+      apiKey: '',
       model: '',
       port: 3456,
-      method: 'POST'
+      // Provider-specific settings
+      providers: {
+        volcano: {
+          api: 'http://ark.cn-beijing.volces.com/api/v3/chat/completions',
+          method: 'POST',
+          availableModels: [
+            { id: 'volc-ark', name: 'Volcano Ark' },
+            { id: 'volc-ark-2.0', name: 'Volcano Ark 2.0' }
+          ]
+        },
+        openai: {
+          api: 'https://api.openai.com/v1/chat/completions',
+          method: 'POST',
+          availableModels: [
+            { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
+            { id: 'gpt-4', name: 'GPT-4' },
+            { id: 'gpt-4-turbo', name: 'GPT-4 Turbo' }
+          ]
+        },
+        deepseek: {
+          api: 'https://api.deepseek.com/v1/chat/completions',
+          method: 'POST',
+          availableModels: [
+            { id: 'deepseek-chat', name: 'DeepSeek Chat' },
+            { id: 'deepseek-coder', name: 'DeepSeek Coder' }
+          ]
+        }
+      },
+      // Generation settings
+      temperature: 0.7,
+      maxTokens: 2000,
+      topP: 1,
+      frequencyPenalty: 0,
+      presencePenalty: 0
     },
-    // 扩展主题列表
+    // Extended theme list
     extendThemeGroupList: [],
-    // 内置背景图片
+    // Built-in background images
     bgList: []
   },
   mutations: {
-    // 设置操作本地文件标志位
+    // Set flag for operating on local file
     setIsHandleLocalFile(state, data) {
       state.isHandleLocalFile = data
     },
 
-    // 设置本地配置
+    // Set local configuration
     setLocalConfig(state, data) {
       const aiConfigKeys = Object.keys(state.aiConfig)
+      const providerConfigKeys = ['provider', 'apiKey', 'model', 'temperature', 'maxTokens', 'topP', 'frequencyPenalty', 'presencePenalty']
+      
       Object.keys(data).forEach(key => {
         if (aiConfigKeys.includes(key)) {
+          // Handle direct AI config updates
+          state.aiConfig[key] = data[key]
+        } else if (providerConfigKeys.includes(key)) {
+          // Handle AI provider config updates
           state.aiConfig[key] = data[key]
         } else {
           state.localConfig[key] = data[key]
         }
       })
+      
+      // Save to local storage
       storeLocalConfig({
         ...state.localConfig,
-        ...state.aiConfig
+        aiConfig: state.aiConfig
+      })
+    },
+    
+    // Update AI configuration
+    updateAiConfig(state, { key, value }) {
+      if (key in state.aiConfig) {
+        state.aiConfig[key] = value
+      } else if (key === 'provider' && state.aiConfig.providers[value]) {
+        // When changing provider, update the model to the first available model for that provider
+        state.aiConfig.provider = value
+        state.aiConfig.model = state.aiConfig.providers[value].availableModels[0]?.id || ''
+      }
+      
+      // Save to local storage
+      storeLocalConfig({
+        ...state.localConfig,
+        aiConfig: state.aiConfig
       })
     },
 
-    // 设置当前显示的侧边栏
+    // Set currently displayed sidebar
     setActiveSidebar(state, data) {
       state.activeSidebar = data
     },
 
-    // 设置大纲编辑模式
+    // Set outline edit mode
     setIsOutlineEdit(state, data) {
       state.isOutlineEdit = data
     },
 
-    // 设置是否只读
+    // Set read-only mode
     setIsReadonly(state, data) {
       state.isReadonly = data
     },
 
-    // 设置源码编辑模式
+    // Set source code edit mode
     setIsSourceCodeEdit(state, data) {
       state.isSourceCodeEdit = data
     },
 
-    // 设置导出时底部添加的文字
+    // Set text to add at bottom when exporting
     setExtraTextOnExport(state, data) {
       state.extraTextOnExport = data
     },
 
-    // 设置树节点拖拽
+    // Set tree node dragging
     setIsDragOutlineTreeNode(state, data) {
       state.isDragOutlineTreeNode = data
     },
 
-    // 扩展主题列表
+    // Extended theme list
     setExtendThemeGroupList(state, data) {
       state.extendThemeGroupList = data
     },
 
-    // 设置背景图片列表
+    // Set background image list
     setBgList(state, data) {
       state.bgList = data
     }

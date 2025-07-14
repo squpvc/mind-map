@@ -1,10 +1,10 @@
 <template>
   <div class="toolbarContainer" :class="{ isDark: isDark }">
     <div class="toolbar" ref="toolbarRef">
-      <!-- 节点操作 -->
+      <!-- Node Operations -->
       <div class="toolbarBlock">
         <ToolbarNodeBtnList :list="horizontalList"></ToolbarNodeBtnList>
-        <!-- 更多 -->
+        <!-- More -->
         <el-popover
           v-model="popoverShow"
           placement="bottom-end"
@@ -24,7 +24,7 @@
           </div>
         </el-popover>
       </div>
-      <!-- 导出 -->
+      <!-- Export -->
       <div class="toolbarBlock">
         <div class="toolbarBtn" @click="openDirectory" v-if="!isMobile">
           <span class="icon iconfont icondakai"></span>
@@ -68,7 +68,7 @@
           <span class="icon iconfont iconexport"></span>
           <span class="text">{{ $t('toolbar.export') }}</span>
         </div>
-        <!-- 本地文件树 -->
+        <!-- Local file tree -->
         <div
           class="fileTreeBox"
           v-if="fileTreeVisible"
@@ -116,14 +116,14 @@
                     size="mini"
                     v-if="data.enableEdit"
                     @click="editLocalFile(data)"
-                    >编辑</el-button
+                    >Edit</el-button
                   >
                   <el-button
                     type="text"
                     size="mini"
                     v-else
                     @click="importLocalFile(data)"
-                    >导入</el-button
+                    >Import</el-button
                   >
                 </div>
               </span>
@@ -157,7 +157,7 @@ import { getData } from '../../../api'
 import ToolbarNodeBtnList from './ToolbarNodeBtnList.vue'
 import { throttle, isMobile } from 'simple-mind-map/src/utils/index'
 
-// 工具栏
+// Toolbar
 let fileHandle = null
 const defaultBtnList = [
   'back',
@@ -264,7 +264,7 @@ export default {
     this.$bus.$off('node_note_dblclick', this.onNodeNoteDblclick)
   },
   methods: {
-    // 计算工具按钮如何显示
+    // Calculate how to display the toolbar buttons
     computeToolbarShow() {
       if (!this.$refs.toolbarRef) return
       const windowWidth = window.innerWidth - 40
@@ -292,7 +292,7 @@ export default {
       loopCheck()
     },
 
-    // 监听本地文件读写
+    // Listen for local file read/write operations
     onWriteLocalFile(content) {
       clearTimeout(this.timer)
       if (fileHandle && this.isHandleLocalFile) {
@@ -305,13 +305,13 @@ export default {
 
     onUnload(e) {
       if (this.waitingWriteToLocalFile) {
-        const msg = '存在未保存的数据'
+        const msg = 'There is unsaved data'
         e.returnValue = msg
         return msg
       }
     },
 
-    // 加载本地文件树
+    // Load local file tree
     async loadFileTreeNode(node, resolve) {
       try {
         let dirHandle
@@ -355,7 +355,7 @@ export default {
       }
     },
 
-    // 扫描本地文件夹
+    // Scan local directory
     openDirectory() {
       this.fileTreeVisible = false
       this.fileTreeExpand = true
@@ -365,7 +365,7 @@ export default {
       })
     },
 
-    // 编辑指定文件
+    // Edit specified file
     editLocalFile(data) {
       if (data.handle) {
         fileHandle = data.handle
@@ -373,7 +373,7 @@ export default {
       }
     },
 
-    // 导入指定文件
+    // Import specified file
     async importLocalFile(data) {
       try {
         const file = await data.handle.getFile()
@@ -387,7 +387,7 @@ export default {
       }
     },
 
-    // 打开本地文件
+    // Open local file
     async openLocalFile() {
       try {
         let [_fileHandle] = await window.showOpenFilePicker({
@@ -420,7 +420,7 @@ export default {
       }
     },
 
-    // 读取本地文件
+    // Read local file
     async readFile() {
       let file = await fileHandle.getFile()
       let fileReader = new FileReader()
@@ -440,7 +440,7 @@ export default {
       fileReader.readAsText(file)
     },
 
-    // 渲染读取的数据
+    // Render the read data
     setData(str) {
       try {
         let data = JSON.parse(str)
@@ -463,7 +463,7 @@ export default {
       }
     },
 
-    // 写入本地文件
+    // Write to local file
     async writeLocalFile(content) {
       if (!fileHandle || !this.isHandleLocalFile) {
         this.waitingWriteToLocalFile = false
@@ -479,18 +479,18 @@ export default {
       this.waitingWriteToLocalFile = false
     },
 
-    // 创建本地文件
+    // Create local file
     async createNewLocalFile() {
       await this.createLocalFile(exampleData)
     },
 
-    // 另存为
+    // Save As
     async saveLocalFile() {
       let data = getData()
       await this.createLocalFile(data)
     },
 
-    // 创建本地文件
+    // Create local file
     async createLocalFile(content) {
       try {
         let _fileHandle = await window.showSaveFilePicker({

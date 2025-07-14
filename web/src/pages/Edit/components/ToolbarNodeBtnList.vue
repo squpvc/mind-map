@@ -178,149 +178,235 @@
         <span class="icon iconfont iconwaikuang"></span>
         <span class="text">{{ $t('toolbar.outerFrame') }}</span>
       </div>
-      <div
+      <el-dropdown
         v-if="item === 'ai'"
-        class="toolbarBtn"
-        :class="{
-          disabled: hasGeneralization
-        }"
-        @click="aiCrate"
+        trigger="click"
+        placement="bottom"
+        @command="handleAiCommand"
+        popper-class="ai-model-dropdown"
       >
-        <span class="icon iconfont iconAIshengcheng"></span>
-        <span class="text">{{ $t('toolbar.ai') }}</span>
-      </div>
+        <div class="toolbarBtn ai-toolbar-btn">
+          <span class="icon iconfont iconAI"></span>
+          <span class="text">{{ currentAiModel ? currentAiModel.name : $t('ai.ai') }}</span>
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </div>
+        <el-dropdown-menu slot="dropdown" class="ai-model-menu">
+          <div class="ai-model-header">
+            <span>{{ $t('ai.selectModel') }}</span>
+          </div>
+          <el-dropdown-item 
+            v-for="model in availableAiModels" 
+            :key="model.id"
+            :command="{ type: 'selectModel', model }"
+            :class="{ 'is-active': isCurrentAiModel(model.id) }"
+            class="ai-model-item"
+          >
+            <div class="ai-model-item-content">
+              <span class="ai-model-name">{{ model.name }}</span>
+              <span class="ai-model-provider">{{ model.provider }}</span>
+              <i v-if="isCurrentAiModel(model.id)" class="el-icon-check"></i>
+            </div>
+          </el-dropdown-item>
+          <el-dropdown-item divided class="ai-model-settings" :command="{ type: 'openSettings' }">
+            <i class="el-icon-setting"></i>
+            <span>{{ $t('ai.settings') }}</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </template>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
-
-export default {
-  props: {
-    dir: {
-      type: String,
-      default: 'h' // h（水平排列）、v（垂直排列）
-    },
-    list: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
-  },
-  data() {
-    return {
-      activeNodes: [],
-      backEnd: true,
-      forwardEnd: true,
-      readonly: false,
-      isFullDataFile: false,
-      timer: null,
-      isInPainter: false
-    }
-  },
-  computed: {
-    ...mapState({
-      isDark: state => state.localConfig.isDark
-    }),
-    hasRoot() {
-      return (
-        this.activeNodes.findIndex(node => {
-          return node.isRoot
-        }) !== -1
-      )
-    },
-    hasGeneralization() {
-      return (
-        this.activeNodes.findIndex(node => {
-          return node.isGeneralization
-        }) !== -1
-      )
-    },
-    annotationRightHasBtn() {
-      const index = this.list.findIndex(item => {
-        return item === 'annotation'
-      })
-      return index !== -1 && index < this.list.length - 1
-    }
-  },
-  created() {
-    this.$bus.$on('mode_change', this.onModeChange)
-    this.$bus.$on('node_active', this.onNodeActive)
-    this.$bus.$on('back_forward', this.onBackForward)
-    this.$bus.$on('painter_start', this.onPainterStart)
-    this.$bus.$on('painter_end', this.onPainterEnd)
-  },
-  beforeDestroy() {
-    this.$bus.$off('mode_change', this.onModeChange)
-    this.$bus.$off('node_active', this.onNodeActive)
-    this.$bus.$off('back_forward', this.onBackForward)
-    this.$bus.$off('painter_start', this.onPainterStart)
-    this.$bus.$off('painter_end', this.onPainterEnd)
-  },
-  methods: {
-    ...mapMutations(['setActiveSidebar']),
-
-    // 监听模式切换
-    onModeChange(mode) {
-      this.readonly = mode === 'readonly'
-    },
-
-    // 监听节点激活
-    onNodeActive(...args) {
-      this.activeNodes = [...args[1]]
-    },
-
-    // 监听前进后退
-    onBackForward(index, len) {
-      this.backEnd = index <= 0
-      this.forwardEnd = index >= len - 1
-    },
-
-    // 开始格式刷
-    onPainterStart() {
-      this.isInPainter = true
-    },
-
-    // 格式刷结束
-    onPainterEnd() {
-      this.isInPainter = false
-    },
-
-    // 显示节点图标侧边栏
-    showNodeIcon() {
-      this.$bus.$emit('close_node_icon_toolbar')
-      this.setActiveSidebar('nodeIconSidebar')
-    },
-
-    // 打开公式侧边栏
-    showFormula() {
-      this.setActiveSidebar('formulaSidebar')
-    },
-
-    // 选择附件
-    selectAttachmentFile() {
-      this.$bus.$emit('selectAttachment', this.activeNodes)
-    },
-
-    // 设置标记
-    onSetAnnotation(...args) {
-      this.$bus.$emit('execCommand', 'SET_NOTATION', this.activeNodes, ...args)
-    },
-
-    // AI生成整体
-    aiCrate() {
-      this.$bus.$emit('ai_create_all')
-    }
-  }
-}
+  // ...
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .toolbarNodeBtnList {
   display: flex;
+  
+  .ai-model-dropdown {
+    padding: 8px 0;
+    min-width: 220px;
+    
+    .ai-model-header {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #909399;
+      border-bottom: 1px solid #EBEEF5;
+      margin-bottom: 4px;
+    }
+    
+    .ai-model-menu {
+      padding: 4px 0;
+      min-width: 220px;
+      border: none;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      
+      .ai-model-item {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        line-height: normal;
+        
+        &.is-active {
+          color: #409EFF;
+          background-color: #f0f7ff;
+        }
+        
+        .ai-model-item-content {
+          display: flex;
+          align-items: center;
+          padding: 8px 16px;
+          width: 100%;
+        }
+        
+        .ai-model-name {
+          flex: 1;
+          margin-right: 8px;
+        }
+        
+        .ai-model-provider {
+          font-size: 12px;
+          color: #909399;
+          margin-right: 8px;
+        }
+        
+        .el-icon-check {
+          margin-left: 8px;
+          color: #409EFF;
+        }
+      }
+      
+      .ai-model-settings {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        color: #606266;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        
+        &:hover {
+          background-color: #f5f7fa;
+        }
+        
+        .el-icon-setting {
+          margin-right: 8px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  
+  .toolbarBtn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    color: #666;
+    font-size: 12px;
+    transition: all 0.2s;
+    margin-right: 20px;
+    
+    &:last-of-type {
+      margin-right: 0;
+    }
+    
+    &:hover {
+      &:not(.disabled) {
+        .icon {
+          background: #f5f5f5;
+        }
+      }
+    }
+    
+    &.active {
+      .icon {
+        background: #f5f5f5;
+      }
+    }
+    
+    &.has-dropdown {
+      .el-icon-arrow-down {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        font-size: 10px;
+        opacity: 0.7;
+      }
+    }
+    
+    &.disabled {
+      color: #bcbcbc;
+      cursor: not-allowed;
+      pointer-events: none;
+      
+      &:hover {
+        background-color: transparent;
+      }
+    }
 
+    .icon {
+      display: flex;
+      height: 26px;
+      background: #fff;
+      border-radius: 4px;
+      border: 1px solid #e9e9e9;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 0 5px;
+    }
+
+    .text {
+      margin-top: 3px;
+      text-align: center;
+    }
+  }
+
+  // Vertical layout for sidebar
+  &.v {
+    display: block;
+    width: 120px;
+    flex-wrap: wrap;
+
+    .toolbarBtn {
+      flex-direction: row;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      width: 100%;
+      margin-right: 0;
+      height: auto;
+      padding: 8px 10px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .icon {
+        margin-right: 10px;
+      }
+
+      .text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .el-icon-arrow-down {
+        position: static;
+        margin-left: auto;
+        font-size: 12px;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  // Dark mode styles
   &.isDark {
     .toolbarBtn {
       color: hsla(0, 0%, 100%, 0.9);
@@ -344,79 +430,26 @@ export default {
     }
   }
 
-  .toolbarBtn {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    cursor: pointer;
-    margin-right: 20px;
+  // Dark theme overrides
+  &.is-dark {
+    background-color: #2d2d2d;
+    border-color: #4c4c4c;
 
-    &:last-of-type {
-      margin-right: 0;
-    }
-
-    &:hover {
-      &:not(.disabled) {
-        .icon {
-          background: #f5f5f5;
+    .ai-model-list {
+      .ai-model-item {
+        color: #e4e7ed;
+        
+        .ai-model-divider {
+          background-color: #4c4c4c;
         }
-      }
-    }
-
-    &.active {
-      .icon {
-        background: #f5f5f5;
-      }
-    }
-
-    &.disabled {
-      color: #bcbcbc;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .icon {
-      display: flex;
-      height: 26px;
-      background: #fff;
-      border-radius: 4px;
-      border: 1px solid #e9e9e9;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 0 5px;
-    }
-
-    .text {
-      margin-top: 3px;
-      text-align: center;
-    }
-  }
-
-  &.v {
-    display: block;
-    width: 120px;
-    flex-wrap: wrap;
-
-    .toolbarBtn {
-      flex-direction: row;
-      justify-content: flex-start;
-      margin-bottom: 10px;
-      width: 100%;
-      margin-right: 0;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-
-      .icon {
-        margin-right: 10px;
-      }
-
-      .text {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        
+        .ai-model-settings {
+          color: #a0a0a0;
+          
+          &:hover {
+            background-color: #363636;
+          }
+        }
       }
     }
   }

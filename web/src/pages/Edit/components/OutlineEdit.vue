@@ -76,7 +76,7 @@ import {
 import { storeData } from '@/api'
 import { printOutline } from '@/utils'
 
-// 大纲侧边栏
+// Outline sidebar
 export default {
   props: {
     mindMap: {
@@ -118,17 +118,17 @@ export default {
   methods: {
     ...mapMutations(['setIsOutlineEdit']),
 
-    // 刷新树数据
+    // Refresh tree data
     refresh() {
       let data = this.mindMap.getData()
-      data.root = true // 标记根节点
+      data.root = true // Mark root node
       let walk = root => {
         let text = root.data.richText
           ? nodeRichTextToTextWithWrap(root.data.text)
           : root.data.text
         text = htmlEscape(text)
         text = text.replace(/\n/g, '<br>')
-        root.textCache = text // 保存一份修改前的数据，用于对比是否修改了
+        root.textCache = text // Save a copy of the data before modification to compare if it has been changed
         root.label = text
         root.uid = root.data.uid
         if (root.children && root.children.length > 0) {
@@ -141,24 +141,24 @@ export default {
       this.data = [data]
     },
 
-    // 根节点不允许拖拽
+    // Root node cannot be dragged
     checkAllowDrag(node) {
       return !node.data.root
     },
 
-    // 拖拽结束事件
+    // Drag end event
     onNodeDrop() {
       this.save()
     },
 
-    // 当前选中的树节点变化事件
+    // Currently selected tree node change event
     onCurrentChange(data) {
       this.currentData = data
     },
 
-    // 失去焦点更新节点文本
+    // Update node text when losing focus
     onBlur(e, node) {
-      // 节点数据没有修改
+      // Node data has not been modified
       if (node.data.textCache === e.target.innerHTML) {
         return
       }
@@ -169,7 +169,7 @@ export default {
       this.save()
     },
 
-    // 节点输入区域按键事件
+    // Node input area key event
     onNodeInputKeydown(e, node) {
       const richText = !!node.data.data.richText
       const uid = createUid()
@@ -195,7 +195,7 @@ export default {
       if (e.keyCode === 9) {
         e.preventDefault()
         if (e.shiftKey) {
-          // 上移一个层级
+          // Move up one level
           this.$refs.tree.insertAfter(node.data, node.parent)
           this.$refs.tree.remove(node)
         } else {
@@ -220,7 +220,7 @@ export default {
       })
     },
 
-    // 删除节点
+    // Delete node
     onKeyDown(e) {
       if (!this.isOutlineEdit) return
       if ([46, 8].includes(e.keyCode) && this.currentData) {
@@ -231,28 +231,28 @@ export default {
       }
     },
 
-    // 拦截粘贴事件
+    // Intercept paste event
     onPaste(e) {
       handleInputPasteText(e)
     },
 
-    // 生成唯一的key
+    // Generate unique key
     getKey() {
       return Math.random()
     },
 
-    // 打印
+    // Print
     onPrint() {
       printOutline(this.$refs.outlineEditBox)
     },
 
-    // 关闭
+    // Close
     onClose() {
       this.setIsOutlineEdit(false)
       this.$bus.$emit('setData', this.getData())
     },
 
-    // 滚动
+    // Scroll
     scrollTo(y) {
       let container = this.$refs.outlineEditBox
       let height = container.offsetHeight
@@ -263,7 +263,7 @@ export default {
       }
     },
 
-    // 获取思维导图数据
+    // Get mind map data
     getData() {
       let newNode = {}
       let node = this.data[0]
@@ -280,7 +280,7 @@ export default {
       return simpleDeepClone(newNode)
     },
 
-    // 保存
+    // Save
     save() {
       storeData({
         root: this.getData()

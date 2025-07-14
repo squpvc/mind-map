@@ -45,7 +45,7 @@ import {
   isMobile
 } from 'simple-mind-map/src/utils/index'
 
-// 节点标签内容设置
+// Node tag content settings
 export default {
   data() {
     return {

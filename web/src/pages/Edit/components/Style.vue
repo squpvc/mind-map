@@ -6,7 +6,7 @@
       v-if="activeNodes.length > 0"
     >
       <div class="sidebarContent customScrollbar">
-        <!-- 文字 -->
+        <!-- Text -->
         <div class="title noTop">{{ $t('style.text') }}</div>
         <div class="row">
           <div class="rowItem">
@@ -135,7 +135,7 @@
             </el-radio-group>
           </el-popover>
         </div>
-        <!-- 边框 -->
+        <!-- Border -->
         <div class="title">{{ $t('style.border') }}</div>
         <div class="row">
           <div class="rowItem">
@@ -232,7 +232,7 @@
             </el-select>
           </div>
         </div>
-        <!-- 背景 -->
+        <!-- Background -->
         <div class="title">{{ $t('style.background') }}</div>
         <div class="row">
           <div class="rowItem">
@@ -299,7 +299,7 @@
             </el-select>
           </div>
         </div>
-        <!-- 形状 -->
+        <!-- Shape -->
         <div class="title">{{ $t('style.shape') }}</div>
         <div class="row">
           <div class="rowItem">
@@ -340,7 +340,7 @@
             </el-select>
           </div>
         </div>
-        <!-- 线条 -->
+        <!-- Line -->
         <div class="title">{{ $t('style.line') }}</div>
         <div class="row">
           <div class="rowItem">
@@ -437,7 +437,7 @@
             </el-select>
           </div>
         </div>
-        <!-- 节点内边距 -->
+        <!-- Node padding -->
         <div class="title">{{ $t('style.nodePadding') }}</div>
         <div class="row noBottom">
           <div class="rowItem">
@@ -459,7 +459,7 @@
             ></el-slider>
           </div>
         </div>
-        <!-- 节点图片布局 -->
+        <!-- Node image layout -->
         <div class="title">{{ $t('style.img') }}</div>
         <div class="row">
           <div class="rowItem">
@@ -484,7 +484,7 @@
             </el-radio-group>
           </div>
         </div>
-        <!-- 节点标签布局 -->
+        <!-- Node label layout -->
         <div class="title">{{ $t('style.tag') }}</div>
         <div class="row">
           <div class="rowItem">
@@ -528,7 +528,7 @@ import {
 } from '@/config'
 import { mapState } from 'vuex'
 
-// 节点样式设置
+// Node style settings
 export default {
   components: {
     Sidebar,
@@ -639,7 +639,7 @@ export default {
     this.$bus.$off('node_active', this.onNodeActive)
   },
   methods: {
-    // 监听节点激活事件
+    // Listen for node activation event
     onNodeActive(...args) {
       this.$nextTick(() => {
         this.activeNodes = [...args[1]]
@@ -647,7 +647,7 @@ export default {
       })
     },
 
-    // 初始节点样式
+    // Initial node style
     initNodeStyle() {
       if (this.activeNodes.length <= 0) {
         return
@@ -658,7 +658,7 @@ export default {
       this.initLinearGradientDir()
     },
 
-    // 初始化渐变方向样式
+    // Initialize gradient direction style
     initLinearGradientDir() {
       const startDir = this.activeNodes[0].getStyle('startDir', false)
       const endDir = this.activeNodes[0].getStyle('endDir', false)
@@ -675,7 +675,7 @@ export default {
       }
     },
 
-    // 修改样式
+    // Update style
     update(prop) {
       if (prop === 'linearGradientDir') {
         const target = this.linearGradientDirList.find(item => {
@@ -694,7 +694,7 @@ export default {
       }
     },
 
-    // 切换加粗样式
+    // Toggle bold style
     toggleFontWeight() {
       if (this.style.fontWeight === 'bold') {
         this.style.fontWeight = 'normal'
@@ -704,7 +704,7 @@ export default {
       this.update('fontWeight')
     },
 
-    // 切换字体样式
+    // Toggle font style
     toggleFontStyle() {
       if (this.style.fontStyle === 'italic') {
         this.style.fontStyle = 'normal'
@@ -714,37 +714,37 @@ export default {
       this.update('fontStyle')
     },
 
-    // 修改字体颜色
+    // Change font color
     changeFontColor(color) {
       this.style.color = color
       this.update('color')
     },
 
-    // 修改边框颜色
+    // Change border color
     changeBorderColor(color) {
       this.style.borderColor = color
       this.update('borderColor')
     },
 
-    // 修改线条颜色
+    // Change line color
     changeLineColor(color) {
       this.style.lineColor = color
       this.update('lineColor')
     },
 
-    // 修改背景颜色
+    // Change background color
     changeFillColor(color) {
       this.style.fillColor = color
       this.update('fillColor')
     },
 
-    // 切换渐变开始颜色
+    // Change gradient start color
     changeStartColor(color) {
       this.style.startColor = color
       this.update('startColor')
     },
 
-    // 切换渐变结束颜色
+    // Change gradient end color
     changeEndColor(color) {
       this.style.endColor = color
       this.update('endColor')

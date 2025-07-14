@@ -19,7 +19,7 @@
         <el-select v-model="protocol" slot="prepend" style="width: 80px;">
           <el-option label="https" value="https"></el-option>
           <el-option label="http" value="http"></el-option>
-          <el-option label="无" value="none"></el-option>
+          <el-option label="None" value="none"></el-option>
         </el-select>
       </el-input>
     </div>
@@ -44,7 +44,7 @@
 <script>
 import { isMobile } from 'simple-mind-map/src/utils/index'
 
-// 节点超链接内容设置
+// Node hyperlink content settings
 export default {
   data() {
     return {

@@ -6,15 +6,15 @@
     :width="isMobile ? '90%' : '600px'"
     :top="isMobile ? '20px' : '15vh'"
   >
-    <div class="title">方式一</div>
+    <div class="title">Method 1</div>
     <ImgUpload
       ref="ImgUpload"
       v-model="img"
       style="margin-bottom: 12px;"
     ></ImgUpload>
-    <div class="title">方式二</div>
+    <div class="title">Method 2</div>
     <div class="inputBox">
-      <span class="label">请输入图片地址</span>
+      <span class="label">Please enter image URL</span>
       <el-input
         v-model="imgUrl"
         size="mini"
@@ -22,7 +22,7 @@
         @keydown.native.stop
       ></el-input>
     </div>
-    <div class="title">可选</div>
+    <div class="title">Optional</div>
     <div class="inputBox">
       <span class="label">{{ $t('nodeImage.imgTitle') }}</span>
       <el-input v-model="imgTitle" size="mini" @keydown.native.stop></el-input>
@@ -40,7 +40,7 @@
 import ImgUpload from '@/components/ImgUpload/index.vue'
 import { getImageSize, isMobile } from 'simple-mind-map/src/utils/index'
 
-// 节点图片内容设置
+// Node image content settings
 export default {
   components: {
     ImgUpload
@@ -98,7 +98,7 @@ export default {
 
     async confirm() {
       try {
-        // 删除图片
+        // Delete image
         if (!this.img && !this.imgUrl) {
           this.cancel()
           this.activeNodes.forEach(node => {

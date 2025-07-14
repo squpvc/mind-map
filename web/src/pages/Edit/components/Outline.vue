@@ -48,7 +48,7 @@ import {
   handleInputPasteText
 } from 'simple-mind-map/src/utils'
 
-// 大纲树
+// Outline tree
 export default {
   props: {
     mindMap: {
@@ -102,7 +102,7 @@ export default {
     },
 
     handleDataChange() {
-      // 在大纲里操作节点时不要响应该事件，否则会重新刷新树
+      // Do not respond to this event when operating nodes in the outline, otherwise the tree will be refreshed
       if (this.notHandleDataChange) {
         this.notHandleDataChange = false
         this.isAfterCreateNewNode = false
@@ -116,13 +116,13 @@ export default {
     },
 
     handleNodeTreeRenderEnd() {
-      // 当前存在未完成的节点插入操作
+      // There is currently an unfinished node insertion operation
       if (this.insertType) {
         this[this.insertType]()
         this.insertType = ''
         return
       }
-      // 插入了新节点后需要做一些操作
+      // Need to perform some operations after inserting a new node
       if (this.isHandleNodeTreeRenderEnd) {
         this.isHandleNodeTreeRenderEnd = false
         this.refresh()
@@ -132,17 +132,17 @@ export default {
       }
     },
 
-    // 刷新树数据
+    // Refresh tree data
     refresh() {
       let data = this.mindMap.getData()
-      data.root = true // 标记根节点
+      data.root = true // Mark root node
       let walk = root => {
         let text = root.data.richText
           ? nodeRichTextToTextWithWrap(root.data.text)
           : root.data.text
         text = htmlEscape(text)
         text = text.replace(/\n/g, '<br>')
-        root.textCache = text // 保存一份修改前的数据，用于对比是否修改了
+        root.textCache = text // Save a copy of the data before modification to compare if it has been changed
         root.label = text
         root.uid = root.data.uid
         if (root.children && root.children.length > 0) {
@@ -155,20 +155,20 @@ export default {
       this.data = [data]
     },
 
-    // 插入了新节点之后
+    // After inserting a new node
     afterCreateNewNode() {
-      // 如果是新插入节点，那么需要手动高亮该节点、定位该节点及聚焦
+      // If it is a newly inserted node, then we need to manually highlight the node, position it, and focus it
       let id = this.beInsertNodeUid
       if (id && this.$refs.tree) {
         try {
           this.isAfterCreateNewNode = true
-          // 高亮树节点
+          // Highlight tree node
           this.$refs.tree.setCurrentKey(id)
           let node = this.$refs.tree.getNode(id)
           this.onCurrentChange(node.data)
-          // 定位该节点
+          // Position the node
           this.onClick(node.data)
-          // 聚焦该树节点的编辑框
+          // Focus the edit box of the tree node
           const el = document.querySelector(
             `.customNode[data-id="${id}"] .nodeEdit`
           )
@@ -188,23 +188,23 @@ export default {
       this.beInsertNodeUid = ''
     },
 
-    // 根节点不允许拖拽
+    // Root node is not allowed to be dragged
     checkAllowDrag(node) {
       return !node.data.root
     },
 
-    // 失去焦点更新节点文本
+    // Update node text when losing focus
     onBlur(e, node) {
-      // 节点数据没有修改
+      // Node data has not been modified
       if (node.data.textCache === e.target.innerHTML) {
-        // 如果存在未执行的插入新节点操作，那么直接执行
+        // If there is an unexecuted new node insertion operation, execute it directly
         if (this.insertType) {
           this[this.insertType]()
           this.insertType = ''
         }
         return
       }
-      // 否则插入新节点操作需要等待当前修改事件渲染完成后再执行
+      // Otherwise, the new node insertion operation needs to wait for the current modification event to complete rendering
       const richText = node.data.data.richText
       const text = richText ? e.target.innerHTML : e.target.innerText
       const targetNode = this.mindMap.renderer.findNodeByUid(node.data.uid)
@@ -217,20 +217,20 @@ export default {
       }
     },
 
-    // 拦截粘贴事件
+    // Intercept paste event
     onPaste(e) {
       handleInputPasteText(e)
     },
 
-    // 生成唯一的key
+    // Generate unique key
     getKey() {
       return Math.random()
     },
 
-    // 节点输入区域按键事件
+    // Node input area key event
     onNodeInputKeydown(e) {
       if (e.keyCode === 13 && !e.shiftKey) {
-        // 插入兄弟节点
+        // Insert sibling node
         e.preventDefault()
         this.insertType = 'insertNode'
         e.target.blur()
@@ -238,23 +238,23 @@ export default {
       if (e.keyCode === 9) {
         e.preventDefault()
         if (e.shiftKey) {
-          // 节点上升一级
+          // Move node up one level
           this.insertType = 'moveUp'
           e.target.blur()
         } else {
-          // 插入子节点
+          // Insert child node
           this.insertType = 'insertChildNode'
           e.target.blur()
         }
       }
     },
 
-    // 节点上移一个层级
+    // Move node up one level
     moveUp() {
       this.mindMap.execCommand('MOVE_UP_ONE_LEVEL')
     },
 
-    // 插入兄弟节点
+    // Insert sibling node
     insertNode() {
       this.notHandleDataChange = true
       this.isHandleNodeTreeRenderEnd = true
@@ -264,7 +264,7 @@ export default {
       })
     },
 
-    // 插入下级节点
+    // Insert child node
     insertChildNode() {
       this.notHandleDataChange = true
       this.isHandleNodeTreeRenderEnd = true
@@ -274,7 +274,7 @@ export default {
       })
     },
 
-    // 激活当前节点且移动当前节点到画布中间
+    // Activate current node and move it to the center of the canvas
     onClick(data) {
       this.notHandleDataChange = true
       const targetNode = this.mindMap.renderer.findNodeByUid(data.uid)
@@ -292,7 +292,7 @@ export default {
       this.setIsDragOutlineTreeNode(false)
     },
 
-    // 拖拽结束事件
+    // Drag end event
     onNodeDrop(data, target, postion) {
       this.notHandleDataChange = true
       const node = this.mindMap.renderer.findNodeByUid(data.data.uid)
@@ -315,12 +315,12 @@ export default {
       }
     },
 
-    // 当前选中的树节点变化事件
+    // Currently selected tree node change event
     onCurrentChange(data) {
       this.currentData = data
     },
 
-    // 删除节点
+    // Delete node
     onKeyDown(e) {
       if (!this.isInTreArea) return
       if ([46, 8].includes(e.keyCode) && this.currentData) {

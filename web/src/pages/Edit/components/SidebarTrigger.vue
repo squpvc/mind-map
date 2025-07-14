@@ -27,7 +27,7 @@
 import { mapState, mapMutations } from 'vuex'
 import { sidebarTriggerList } from '@/config'
 
-// 侧边栏触发器
+// Sidebar trigger
 export default {
   data() {
     return {

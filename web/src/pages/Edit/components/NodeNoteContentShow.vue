@@ -21,7 +21,7 @@
 import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer'
 import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 
-// 节点备注内容显示
+// Node note content display
 export default {
   props: {
     mindMap: {
@@ -76,7 +76,7 @@ export default {
       }
     },
 
-    // 显示备注浮层
+    // Show note popup
     onShowNoteContent(content, left, top, node) {
       this.node = node
       this.editor.setMarkdown(content)
@@ -85,7 +85,7 @@ export default {
       this.show = true
     },
 
-    // 超链接新窗口打开
+    // Open hyperlink in new window
     handleALink() {
       const list = this.$refs.noteContentViewer.querySelectorAll('a')
       Array.from(list).forEach(a => {
@@ -93,7 +93,7 @@ export default {
       })
     },
 
-    // 更新位置
+    // Update position
     updateNoteContentPosition(left, top) {
       const { width, height } = this.$refs.noteContentViewer.getBoundingClientRect()
       const { right, bottom } = this.mindMap.elRect
@@ -101,19 +101,19 @@ export default {
       this.top = top + height > bottom ? bottom - height : top
     },
 
-    // 画布缩放事件
+    // Canvas zoom event
     onScale() {
       if (!this.node || !this.show) return
       const { left, top } = this.node.getNoteContentPosition()
       this.updateNoteContentPosition(left, top)
     },
 
-    // 隐藏备注浮层
+    // Hide note popup
     hideNoteContent() {
       this.show = false
     },
 
-    // 初始化编辑器
+    // Initialize editor
     initEditor() {
       if (!this.editor) {
         this.editor = new Viewer({

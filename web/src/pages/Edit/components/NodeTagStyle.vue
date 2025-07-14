@@ -81,11 +81,11 @@ export default {
       if (typeof tag === 'string') {
         this.text = tag
       } else {
-        // v0.10.3+版本支持对象类型
+        // v0.10.3+ version supports object type
         this.text = tag.text
         this.fill = tag.style && tag.style.fill ? tag.style.fill : ''
       }
-      // 获取外框的位置大小信息
+      // Get position and size information of the outer frame
       const { x, y, width, height } = el.rbox()
       const boxWidth = 260
       const boxHeight = 152
@@ -239,8 +239,7 @@ export default {
         margin-right: 2px;
       }
 
-      .text {
-      }
+
     }
   }
 }

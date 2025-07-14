@@ -189,7 +189,7 @@ import { transformToTxt } from 'simple-mind-map/src/parse/toTxt'
 import { setDataToClipboard, setImgToClipboard, copy } from '@/utils'
 import { numberTypeList, numberLevelList } from '@/config'
 
-// 右键菜单
+// Right-click context menu
 export default {
   props: {
     mindMap: {
@@ -326,7 +326,7 @@ export default {
   methods: {
     ...mapMutations(['setLocalConfig']),
 
-    // 计算右键菜单元素的显示位置
+    // Calculate the display position of the context menu element
     getShowPosition(x, y) {
       const rect = this.$refs.contextmenuRef.getBoundingClientRect()
       if (x + rect.width > window.innerWidth) {
@@ -339,7 +339,7 @@ export default {
       return { x, y }
     },
 
-    // 节点右键显示
+    // Show node context menu
     show(e, node) {
       this.type = 'node'
       this.isShow = true
@@ -360,7 +360,7 @@ export default {
       this.isNodeMousedown = true
     },
 
-    // 鼠标按下事件
+    // Mouse down event
     onMousedown(e) {
       if (e.which !== 3) {
         return
@@ -370,7 +370,7 @@ export default {
       this.isMousedown = true
     },
 
-    // 鼠标松开事件
+    // Mouse up event
     onMouseup(e) {
       if (!this.isMousedown) {
         return
@@ -390,7 +390,7 @@ export default {
       this.show2(e)
     },
 
-    // 画布右键显示
+    // Show canvas context menu
     show2(e) {
       this.type = 'svg'
       this.isShow = true
@@ -401,7 +401,7 @@ export default {
       })
     },
 
-    // 隐藏
+    // Hide
     hide() {
       this.isShow = false
       this.left = -9999
@@ -412,7 +412,7 @@ export default {
       this.numberLevel = ''
     },
 
-    // 执行命令
+    // Execute command
     exec(key, disabled, ...args) {
       if (disabled) {
         return
@@ -467,7 +467,7 @@ export default {
       this.hide()
     },
 
-    // 复制到剪贴板
+    // Copy to clipboard
     async copyToClipboard(type) {
       try {
         this.hide()
@@ -509,7 +509,7 @@ export default {
       }
     },
 
-    // AI续写
+    // AI continuation
     aiCreate() {
       this.$bus.$emit('ai_create_part', this.node)
       this.hide()

@@ -9,12 +9,12 @@
     <!-- <el-input
       type="textarea"
       :autosize="{ minRows: 3, maxRows: 5 }"
-      placeholder="请输入内容"
+      placeholder="Please enter content"
       v-model="note"
     >
     </el-input> -->
     <div class="noteEditor" ref="noteEditor" @keyup.stop @keydown.stop></div>
-    <!-- <div class="tip">换行请使用：Enter+Shift</div> -->
+    <!-- <div class="tip">Use Enter+Shift for line breaks</div> -->
     <span slot="footer" class="dialog-footer">
       <el-button @click="cancel">{{ $t('dialog.cancel') }}</el-button>
       <el-button type="primary" @click="confirm">{{
@@ -29,7 +29,7 @@ import Editor from '@toast-ui/editor'
 import '@toast-ui/editor/dist/toastui-editor.css' // Editor's Style
 import { isMobile } from 'simple-mind-map/src/utils/index'
 
-// 节点备注内容设置
+// Node note content settings
 export default {
   name: 'NodeNote',
   data() {

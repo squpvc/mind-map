@@ -105,14 +105,14 @@ export const storeLang = lang => {
 // 获取存储的语言
 export const getLang = () => {
   if (window.takeOverApp) {
-    return window.takeOverAppMethods.getLanguage() || 'zh'
+    return window.takeOverAppMethods.getLanguage() || 'en'
   }
   let lang = localStorage.getItem(SIMPLE_MIND_MAP_LANG)
   if (lang) {
     return lang
   }
-  storeLang('zh')
-  return 'zh'
+  storeLang('en')
+  return 'en'
 }
 
 // 存储本地配置

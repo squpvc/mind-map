@@ -34,7 +34,7 @@ import { mapState, mapMutations } from 'vuex'
 import themeImgMap from 'simple-mind-map-plugin-themes/themeImgMap'
 import themeList from 'simple-mind-map-plugin-themes/themeList'
 
-// 主题
+// Theme
 export default {
   components: {
     Sidebar
@@ -52,7 +52,7 @@ export default {
     return {
       themeList: [
         {
-          name: '默认主题',
+          name: 'Default Theme',
           value: 'default',
           dark: false
         },

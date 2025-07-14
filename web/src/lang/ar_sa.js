@@ -1,0 +1,548 @@
+export default {
+  baseStyle: {
+    title: 'النمط الأساسي',
+    background: 'الخلفية',
+    color: 'اللون',
+    image: 'صورة',
+    imageRepeat: 'تكرار الصورة',
+    imagePosition: 'موضع الصورة',
+    imageSize: 'حجم الصورة',
+    line: 'خط',
+    width: 'العرض',
+    style: 'النمط',
+    lineRadius: 'نصف القطر',
+    lineOfOutline: 'خط المخطط التفصيلي',
+    showArrow: 'إظهار السهم',
+    nodePadding: 'هامش العقدة الداخلي',
+    nodeMargin: 'هامش العقدة الخارجي',
+    horizontal: 'أفقي',
+    vertical: 'عمودي',
+    maximumWidth: 'العرض الأقصى',
+    maximumHeight: 'الارتفاع الأقصى',
+    icon: 'أيقونة',
+    size: 'الحجم',
+    level2Node: 'عقدة المستوى 2',
+    belowLevel2Node: 'أسفل عقدة المستوى 2',
+    nodeBorderType: 'نمط حدود العقدة',
+    nodeUseLineStyle: 'استخدام نمط الحد السفلي فقط',
+    otherConfig: 'إعدادات أخرى',
+    associativeLine: 'خط ترابطي',
+    associativeLineWidth: 'العرض',
+    associativeLineColor: 'اللون',
+    associativeLineActiveWidth: 'العرض النشط',
+    associativeLineActiveColor: 'اللون النشط',
+    rootStyle: 'العقدة الجذرية',
+    associativeLineText: 'نص الخط الترابطي',
+    fontFamily: 'نوع الخط',
+    fontSize: 'حجم الخط',
+    rootLineStartPos: 'موضع بدء خط الجذر',
+    center: 'الوسط',
+    edge: 'الحافة',
+    rainbowLines: 'خطوط قوس قزح',
+    notUseRainbowLines: 'عدم استخدام خطوط قوس قزح',
+    outerFramePadding: 'هامش الإطار الخارجي',
+    associativeLineStyle: 'نمط الخط الترابطي',
+    builtInBackgroundImage: 'صورة خلفية مدمجة'
+  },
+  setting: {
+    title: 'الإعدادات',
+    openPerformance: 'تفعيل وضع الأداء',
+    enableFreeDrag: 'تفعيل السحب الحر للعقد (تجريبي)',
+    isEnableNodeRichText: 'تفعيل تحرير النص المنسق للعقدة',
+    mousewheelAction: 'سلوك عجلة الماوس',
+    zoomView: 'تكبير/تصغير العرض',
+    moveViewUpDown: 'تحريك العرض لأعلى ولأسفل',
+    mousewheelZoomActionReverse: 'عكس اتجاه تكبير/تصغير عجلة الماوس',
+    mousewheelZoomActionReverse1: 'التصغير للأمام والتكبير للخلف',
+    mousewheelZoomActionReverse2: 'التكبير للأمام والتصغير للخلف',
+    createNewNodeBehavior: 'سلوك إنشاء عقدة جديدة',
+    default: 'تنشيط العقدة الجديدة والتحرير',
+    notActive: 'عدم تنشيط العقدة الجديدة',
+    activeOnly: 'تنشيط العقدة الجديدة فقط دون تحرير',
+    openRealtimeRenderOnNodeTextEdit:
+      'تفعيل تأثير العرض الفوري عند تحرير نص العقدة',
+    isShowScrollbar: 'إظهار شريط التمرير',
+    isUseHandDrawnLikeStyle: 'استخدام نمط الرسم اليدوي',
+    isUseMomentum: 'تفعيل زخم السحب',
+    openBlankMode: 'تفعيل وضع الفراغ للعرض التوضيحي',
+    watermark: 'علامة مائية',
+    showWatermark: 'إظهار العلامة المائية',
+    onlyExport: 'تصدير فقط',
+    watermarkDefaultText: 'نص العلامة المائية',
+    watermarkText: 'نص العلامة المائية',
+    watermarkTextColor: 'لون النص',
+    watermarkLineSpacing: 'تباعد الأسطر',
+    watermarkTextSpacing: 'تباعد النصوص',
+    watermarkAngle: 'الزاوية',
+    watermarkTextOpacity: 'شفافية النص',
+    watermarkTextFontSize: 'حجم الخط',
+    belowNode: 'عرض أسفل العقد',
+    alwaysShowExpandBtn: 'إظهار زر التوسيع دائمًا',
+    enableAutoEnterTextEditWhenKeydown: 'الدخول التلقائي لتحرير النص عند الضغط على مفتاح',
+    confirm: 'تأكيد',
+    cancel: 'إلغاء',
+
+    changeRichTextTip:
+      'هذه العملية ستمحو جميع سجلات التعديل التاريخية وتعدل بيانات الخريطة الذهنية. هل ترغب في المتابعة؟',
+    changeRichTextTip2: 'هل تريد التبديل إلى وضع النص المنسق؟',
+    changeRichTextTip3: 'هل تريد التبديل إلى وضع النص غير المنسق؟',
+    enableDragImport:
+      'هل تسمح بسحب وإفلات الملفات مباشرة إلى الصفحة للاستيراد؟',
+    imgTextMargin: 'هامش صورة ونص العقدة',
+    textContentMargin: 'هامش محتويات العقدة',
+    enableInheritAncestorLineStyle:
+      'نمط اتصال العقدة يرث نمط العقد الأسلاف',
+    enableAi: 'هل تمكين وظيفة الذكاء الاصطناعي'
+  },
+  color: {
+    moreColor: 'المزيد من الألوان'
+  },
+  contextmenu: {
+    insertSiblingNode: 'إدراج عقدة شقيقة',
+    insertChildNode: 'إدراج عقدة فرعية',
+    insertParentNode: 'إدراج عقدة أصلية',
+    insertSummary: 'إدراج ملخص',
+    moveUpNode: 'تحريك العقدة لأعلى',
+    moveDownNode: 'تحريك العقدة لأسفل',
+    deleteNode: 'حذف العقدة',
+    deleteCurrentNode: 'حذف العقدة الحالية فقط',
+    copyNode: 'نسخ العقدة',
+    cutNode: 'قص العقدة',
+    pasteNode: 'لصق العقدة',
+    backCenter: 'العودة إلى العقدة الجذرية',
+    expandAll: 'توسيع الكل',
+    unExpandAll: 'طي الكل',
+    expandTo: 'توسيع إلى',
+    arrangeLayout: 'ترتيب التخطيط',
+    level1: 'المستوى 1',
+    level2: 'المستوى 2',
+    level3: 'المستوى 3',
+    level4: 'المستوى 4',
+    level5: 'المستوى 5',
+    level6: 'المستوى 6',
+    zenMode: 'وضع التركيز',
+    fitCanvas: 'ملاءمة اللوحة',
+    removeImage: 'إزالة الصورة',
+    removeHyperlink: 'إزالة الارتباط التشعبي',
+    removeNote: 'إزالة الملاحظة',
+    removeCustomStyles: 'إزالة الأنماط المخصصة',
+    removeAllNodeCustomStyles: 'إزالة جميع أنماط العقد المخصصة',
+    exportNodeToPng: 'تصدير العقدة إلى png',
+    copyToClipboard: 'نسخ إلى الحافظة',
+    copyToSmm: 'SMM',
+    copyToJson: 'JSON',
+    copyToMarkdown: 'Markdown',
+    copyToTxt: 'Txt',
+    copyToPng: 'Png',
+    copySuccess: 'تم النسخ بنجاح',
+    copyFail: 'فشل النسخ',
+    number: 'ترقيم العقد الفرعية',
+    expandNodeChild: 'توسيع جميع العقد الفرعية',
+    unExpandNodeChild: 'طي جميع العقد الفرعية',
+    addToDo: 'إضافة مهمة',
+    removeToDo: 'إزالة مهمة',
+    aiCreate: 'متابعة بالذكاء الاصطناعي',
+    modifyNodeLink: 'تعديل رابط العقدة',
+    linkToNode: 'ربط بعقدة',
+    removeNodeLink: 'إزالة رابط العقدة'
+  },
+  count: {
+    words: 'الكلمات',
+    nodes: 'العقد'
+  },
+  dialog: {
+    cancel: 'إلغاء',
+    confirm: 'تأكيد'
+  },
+  export: {
+    title: 'تصدير',
+    filename: 'اسم الملف',
+    include: 'هل تريد تضمين الإعدادات مثل السمة والهيكل',
+    dedicatedFile: 'ملف مخصص',
+    jsonFile: 'ملف json',
+    imageFile: 'ملف صورة',
+    svgFile: 'ملف svg',
+    pdfFile: 'ملف pdf',
+    markdownFile: 'ملف markdown',
+    isTransparent: 'الخلفية شفافة',
+    transformingDomToImages: 'تحويل العقد: ',
+    notifyTitle: 'معلومات',
+    notifyMessage:
+      'إذا لم يبدأ التنزيل، تحقق مما إذا كان المتصفح قد حظره',
+    paddingX: 'الهامش الأفقي',
+    paddingY: 'الهامش العمودي',
+    useMultiPageExport: 'تصدير متعدد الصفحات',
+    defaultFileName: 'خريطة ذهنية',
+    addFooterTextPlaceholder: 'مثال: من simple-mind-map',
+    addFooterText: 'إضافة نص في التذييل',
+    desc: 'الوصف',
+    options: 'الخيارات',
+    isFitBg:
+      'هل تريد عرض صورة الخلفية كاملة (فعال عند استخدام صورة خلفية)',
+    format: 'التنسيق',
+    confirm: 'تصدير'
+  },
+  fullscreen: {
+    fullscreenShow: 'عرض ملء الشاشة',
+    fullscreenEdit: 'تحرير ملء الشاشة'
+  },
+  demonstrate: {
+    demonstrate: 'الدخول إلى وضع العرض التوضيحي'
+  },
+  import: {
+    title: 'استيراد',
+    selectFile: 'اختر ملف',
+    support: 'يدعم',
+    file: 'ملف',
+    pleaseSelect: 'يرجى الاختيار',
+    maxFileNum: 'يمكن اختيار ملف واحد على الأكثر',
+    notSelectTip: 'يرجى اختيار الملف للاستيراد',
+    fileContentError: 'محتوى الملف غير صحيح',
+    importSuccess: 'تم الاستيراد بنجاح',
+    fileParsingFailed: 'فشل في تحليل الملف',
+    xmindCanvasSelectDialogTitle: 'اختر اللوحة للاستيراد',
+    mdImportDialogTitle: 'الصق محتوى Markdown للاستيراد',
+    mdPlaceholder: 'يرجى إدخال المحتوى بتنسيق Markdown',
+    mdEmptyTip: 'لا يمكن أن يكون المحتوى فارغًا'
+  },
+  navigatorToolbar: {
+    openMiniMap: 'فتح الخريطة المصغرة',
+    closeMiniMap: 'إغلاق الخريطة المصغرة',
+    readonly: 'التحويل إلى وضع القراءة فقط',
+    edit: 'التحويل إلى وضع التحرير',
+    backToRoot: 'العودة إلى العقدة الجذرية',
+    changeSourceCodeEdit: 'التبديل إلى وضع تحرير الكود المصدري',
+    shortcutKeys: 'مفاتيح الاختصار',
+    ai: 'حوار الذكاء الاصطناعي',
+    downloadClient: 'تنزيل العميل',
+    site: 'الموقع الرسمي',
+    current: 'الحالي:',
+    downloadDesc: 'يمكنك تنزيله من العنوان التالي:'
+  },
+  nodeHyperlink: {
+    title: 'رابط',
+    link: 'الرابط',
+    name: 'الاسم'
+  },
+  nodeIcon: {
+    title: 'أيقونة'
+  },
+  nodeImage: {
+    title: 'صورة',
+    imgTitle: 'العنوان'
+  },
+  nodeNote: {
+    title: 'ملاحظة'
+  },
+  nodeTag: {
+    title: 'وسم',
+    addTip: 'اضغط Enter للإضافة'
+  },
+  outline: {
+    title: 'المخطط التفصيلي',
+    nodeDefaultText: 'عقدة فرعية',
+    print: 'طباعة',
+    fullscreen: 'ملء الشاشة'
+  },
+  scale: {
+    zoomIn: 'تكبير',
+    zoomOut: 'تصغير'
+  },
+  shortcutKey: {
+    title: 'مفتاح الاختصار'
+  },
+  strusture: {
+    title: 'هيكل'
+  },
+  style: {
+    title: 'نمط العقدة',
+    normal: 'عادي',
+    active: 'نشط',
+    text: 'نص',
+    fontFamily: 'نوع الخط',
+    fontSize: 'حجم الخط',
+    color: 'اللون',
+    addFontWeight: 'زيادة سماكة الخط',
+    italic: 'مائل',
+    textDecoration: 'تزيين النص',
+    underline: 'تسطير',
+    none: 'لا شيء',
+    lineThrough: 'يتوسطه خط',
+    overline: 'خط علوي',
+    border: 'حد',
+    style: 'نمط',
+    width: 'العرض',
+    borderRadius: 'نصف قطر الحد',
+    background: 'الخلفية',
+    shape: 'الشكل',
+    line: 'خط',
+    nodePadding: 'هامش العقدة الداخلي',
+    horizontal: 'أفقي',
+    vertical: 'عمودي',
+    gradientStyle: 'تدرج لوني',
+    startColor: 'لون البداية',
+    endColor: 'لون النهاية',
+    arrowDir: 'اتجاه السهم',
+    arrowDirStart: 'البداية',
+    arrowDirEnd: 'النهاية',
+    direction: 'الاتجاه',
+    selectNodeTip: 'يرجى تحديد عقدة',
+    openLineFlow: 'فتح تدفق الخط',
+    lineFlowDuration: 'مدة تدفق الخط',
+    forward: 'للأمام',
+    reverse: 'للخلف',
+    img: 'صورة',
+    placement: 'الموضع',
+    top: 'أعلى',
+    bottom: 'أسفل',
+    left: 'يسار',
+    right: 'يمين',
+    tag: 'وسم'
+  },
+  theme: {
+    title: 'السمة',
+    classics: 'كلاسيكي',
+    dark: 'داكن',
+    simple: 'بسيط',
+    coverTip:
+      'لقد قمت حاليًا بتخصيص النمط الأساسي، هل تريد استبداله؟',
+    tip: 'نصيحة',
+    cover: 'استبدال',
+    reserve: 'احتفاظ'
+  },
+  toolbar: {
+    undo: 'تراجع',
+    redo: 'إعادة',
+    insertSiblingNode: 'عقدة شقيقة',
+    insertChildNode: 'عقدة فرعية',
+    deleteNode: 'حذف العقدة',
+    image: 'صورة',
+    icon: 'أيقونة',
+    link: 'رابط',
+    note: 'ملاحظة',
+    tag: 'وسم',
+    summary: 'ملخص',
+    displayOutline: 'عرض المخطط التفصيلي',
+    baseStyle: 'النمط الأساسي',
+    theme: 'السمة',
+    strusture: 'الهيكل',
+    newFile: 'ملف جديد',
+    openFile: 'فتح ملف',
+    saveAs: 'حفظ باسم',
+    import: 'استيراد',
+    export: 'تصدير',
+    shortcutKey: 'مفتاح الاختصار',
+    associativeLine: 'خط ترابطي',
+    painter: 'الرسام',
+    formula: 'صيغة',
+    attachment: 'مرفق',
+    outerFrame: 'إطار خارجي',
+    more: 'المزيد',
+    selectFileTip: 'يرجى تحديد ملف',
+    notSupportTip:
+      'متصفحك لا يدعم هذه الميزة، أو الصفحة الحالية لا تستخدم بروتوكول HTTPS',
+    tip: 'نصيحة',
+    editingLocalFileTipFront: 'تقوم حاليًا بتحرير ملفك المحلي 【',
+    editingLocalFileTipEnd: '】',
+    fileContentError: 'خطأ في محتوى الملف',
+    fileOpenFailed: 'فشل فتح الملف',
+    defaultFileName: 'خريطة ذهنية',
+    creatingTip: 'جاري إنشاء الملف',
+    directory: 'الدليل',
+    newFileTip:
+      'يرجى تصدير الملف الذي يتم تحريره حاليًا قبل إنشاء ملف جديد، احذر من فقدان المحتوى',
+    openFileTip:
+      'يرجى تصدير الملف الذي يتم تحريره حاليًا قبل فتحه، احذر من فقدان المحتوى',
+    ai: 'الذكاء الاصطناعي'
+  },
+  edit: {
+    newFeatureNoticeTitle: 'تذكير بميزة جديدة',
+    newFeatureNoticeMessage:
+      'هذا التحديث يدعم تحرير النص المنسق للعقد، ولكن هناك بعض العيوب، التأثير الأهم هو أن وقت تصدير الصورة يتناسب طرديًا مع عدد العقد، لذا، إذا كنت تعتمد بشكل أكبر على متطلبات التصدير، يمكنك استخدام 【النمط الأساسي】 - 【إعدادات أخرى】 - 【تفعيل تحرير النص المنسق للعقدة】 لتعطيل وضع تحرير النص المنسق.',
+    root: 'العقدة الجذرية',
+    splitByWrap: 'هل يتم تقسيم العقد تلقائيًا بناءً على فواصل الأسطر؟',
+    tip: 'نصيحة',
+    yes: 'نعم',
+    no: 'لا',
+    exportError: 'فشل التصدير',
+    dragTip: 'أفلت هنا لاستيراد الملف',
+    deleteNodeImgTip: 'هل أنت متأكد من حذف صورة العقدة؟',
+    autoOpenNodeRichTextTip:
+      'تم اكتشاف محتوى نصي منسق مستورد، وتم تمكين وضع النص المنسق تلقائيًا',
+    localStorageExceededTip:
+      'لقد تجاوز حجم الخريطة الذهنية التي أنشأتها الحد الأقصى للتخزين المسموح به من قبل المتصفح. يرجى تصديرها فورًا، وإلا ستفقد البيانات! يوصى بتنزيل العميل للاستخدام، حيث لا يوجد حد للحجم للعميل.',
+    withBg: 'مع صورة خلفية',
+    tryTipTitle: 'تجربة وظيفة جديدة',
+    tryTipDesc:
+      'هذه الميزة هي ميزة تجريبية في إصدار الويب. يرجى تنزيل العميل لاستخدامها:',
+    downBaidu: 'اذهب إلى Baidu Netdisk للتنزيل',
+    downGithub: 'تنزيل من Github'
+  },
+  mouseAction: {
+    tip1:
+      'الحالي: النقر بزر الماوس الأيسر لسحب اللوحة، والنقر بزر الماوس الأيمن لتحديد العقد',
+    tip2:
+      'الحالي: النقر بزر الماوس الأيسر لتحديد العقد، والنقر بزر الماوس الأيمن لسحب اللوحة'
+  },
+  search: {
+    searchPlaceholder: 'أدخل محتوى البحث واضغط على Enter',
+    replacePlaceholder: 'الرجاء إدخال محتوى الاستبدال',
+    replace: 'استبدال',
+    replaceAll: 'استبدال الكل',
+    cancel: 'إلغاء',
+    noResult: 'لا توجد نتائج'
+  },
+  nodeIconSidebar: {
+    title: 'أيقونة/ملصق',
+    icon: 'أيقونة',
+    sticker: 'ملصق'
+  },
+  formulaSidebar: {
+    title: 'صيغة',
+    placeholder: 'الرجاء إدخال صيغة LaTeX',
+    confirm: 'تأكيد',
+    common: 'الصيغ الشائعة',
+    tip: 'إدراج الصيغ غير مدعوم في وضع النص غير المنسق'
+  },
+  richTextToolbar: {
+    bold: 'عريض',
+    italic: 'مائل',
+    underline: 'تسطير',
+    strike: 'مشطوب',
+    fontFamily: 'نوع الخط',
+    fontSize: 'حجم الخط',
+    color: 'اللون',
+    backgroundColor: 'لون الخلفية',
+    removeFormat: 'مسح التنسيق',
+    textAlign: 'محاذاة النص'
+  },
+  other: {
+    loading: 'جاري التحميل، يرجى الانتظار...'
+  },
+  sourceCodeEdit: {
+    sourceCodeTip:
+      'لا يوصى بتعديل النمط في وضع النص المنسق لأنه يتطلب تعديلًا متزامنًا للبيانات وهيكل HTML.',
+    format: 'تنسيق',
+    copy: 'نسخ',
+    confirm: 'إكمال',
+    close: 'إغلاق',
+    formatErrorTip: 'تنسيق JSON غير صحيح. يرجى التحقق والمحاولة مرة أخرى',
+    copyTip: 'تم النسخ إلى الحافظة',
+    formatTip: 'اكتمل التنسيق'
+  },
+  attachment: {
+    deleteAttachment: 'حذف المرفق',
+    tip: 'وظيفة المرفقات متاحة فقط على جانب العميل'
+  },
+  annotation: {
+    mark: 'علامة',
+    show: 'إظهار العلامة',
+    type: 'النوع',
+    color: 'اللون',
+    lineWidth: 'عرض الخط',
+    padding: 'الهامش',
+    animate: 'تحريك'
+  },
+  nodeOuterFrame: {
+    outerFrameSetting: 'إعداد الإطار الخارجي',
+    deleteOuterFrame: 'حذف الإطار الخارجي',
+    boxStyle: 'نمط الصندوق',
+    boxColor: 'لون الصندوق',
+    fillColor: 'لون التعبئة',
+    nodeOuterFrameStyle: 'نمط الإطار الخارجي للعقدة',
+    outerFrameText: 'نص الإطار الخارجي',
+    deleteOuterFrameText: 'حذف نص الإطار الخارجي',
+    fontFamily: 'نوع الخط',
+    color: 'اللون',
+    fontSize: 'حجم الخط',
+    radius: 'نصف القطر',
+    fontBold: 'خط عريض',
+    italic: 'مائل',
+    lineHeight: 'ارتفاع السطر',
+    textFillRadius: 'نصف قطر تعبئة النص',
+    textFill: 'لون تعبئة النص',
+    textAlign: 'محاذاة النص',
+    left: 'يسار',
+    center: 'وسط',
+    right: 'يمين',
+    paddingX: 'الهامش الأفقي',
+    paddingY: 'الهامش العمودي'
+  },
+  nodeTagStyle: {
+    placeholder: 'الرجاء إدخال محتوى الوسم',
+    delete: 'حذف هذا الوسم'
+  },
+  ai: {
+    chatTitle: 'حوار الذكاء الاصطناعي',
+    clearRecords: 'مسح السجلات',
+    connectFailedTitle: 'فشل الاتصال بالعميل',
+    connectFailedTip: 'فشل الاتصال بالعميل، يرجى التحقق:',
+    connectFailedCheckTip1:
+      '1. هل قمت بتثبيت عميل الخرائط الذهنية؟ إذا لم يكن كذلك، يرجى النقر هنا للتثبيت:',
+    connectFailedCheckTip2:
+      '2. إذا تم تثبيت العميل، يرجى التأكد من أن العميل مفتوح.',
+    connectFailedCheckTip3:
+      'إذا كان قد تم تثبيته وبدء تشغيله بالفعل، يمكنك محاولة إغلاقه وإعادة تشغيله.',
+    connectFailedCheckTip4:
+      'بعد إكمال الخطوات المذكورة أعلاه، يمكنك النقر على:',
+    baiduNetdisk: 'Baidu Netdisk',
+    createMindMapTitle: 'إنشاء الخرائط الذهنية بنقرة واحدة',
+    createTip:
+      'يرجى إدخال موضوع، وسيقوم الذكاء الاصطناعي بإنشاء خريطة ذهنية بناءً على موضوعك، مثل: خطة سفر عطلة نهاية الأسبوع في هانغتشو.',
+    importantTip:
+      'ملاحظة هامة: الإنشاء بنقرة واحدة سيستبدل البيانات الحالية. يوصى بتصدير البيانات الحالية أولاً.',
+    wantModifyAiConfigTip:
+      'هل تريد تعديل تكوين الذكاء الاصطناعي؟ يرجى النقر على:',
+    modifyAIConfiguration: 'تعديل تكوين الذكاء الاصطناعي',
+    chatInputPlaceholder: 'أدخل للإرسال، Shift+Enter للالتفاف.',
+    send: 'إرسال',
+    stopGenerating: 'إيقاف الإنشاء',
+    generationFailed: 'فشل الإنشاء',
+    aiGenerationSuccess: 'اكتمل إنشاء الذكاء الاصطناعي',
+    stoppedGenerating: 'توقف الإنشاء',
+    AIConfiguration: 'تكوين الذكاء الاصطناعي',
+    VolcanoArkLargeModelConfiguration: 'تكوين نموذج Volcano Ark الكبير:',
+    configTip:
+      'في الوقت الحالي، يتم دعم نموذج Volcano Ark فقط، وتحتاج إلى الحصول على المفتاح بنفسك. للحصول على خطوات التشغيل التفصيلية، يرجى الرجوع إلى:',
+    course: 'الدورة',
+    inferenceAccessPoint: 'نقطة وصول الاستدلال',
+    mindMappingClientConfiguration: 'تكوين عميل الخرائط الذهنية:',
+    port: 'المنفذ',
+    cancel: 'إلغاء',
+    confirm: 'تأكيد',
+    close: 'إغلاق',
+    configSaveSuccessTip: 'تم حفظ التكوين بنجاح',
+    apiValidateTip: 'الرجاء إدخال الواجهة',
+    keyValidateTip: 'الرجاء إدخال مفتاح API',
+    modelValidateTip: 'الرجاء إدخال نقطة وصول الاستدلال',
+    portValidateTip: 'الرجاء إدخال المنفذ',
+    methodValidateTip: 'الرجاء تحديد طريقة الطلب',
+    noInputTip: 'الرجاء إدخال المحتوى',
+    connectSuccessful: 'تم الاتصال بنجاح',
+    connectFailed: 'فشل الاتصال',
+    connectionDetection: 'كشف الاتصال',
+    configurationMissing: 'التكوين مفقود',
+    aiCreateMsgPrefix: 'ساعدني في كتابة واحدة 【',
+    aiCreateMsgPostfix:
+      '】. يجب أن يتم إرجاعها بتنسيق Markdown ويمكنها استخدام صيغتين فقط: عنوان Markdown وقائمة غير مرتبة. يمكن أن تدعم طبقات متعددة من التداخل. ما عليك سوى إرجاع المحتوى.',
+    aiCreatePartMsgPrefix: 'لدي موضوع لـ 【',
+    aiCreatePartMsgCenter:
+      '】 هل يمكنك مساعدتي في متابعة كتابة أحد محتويات الخريطة الذهنية 【',
+    aiCreatePartMsgPostfix: '】 المحتوى التابع للعقدة',
+    aiCreatePartMsgHelp:
+      '. يجب أن يتم إرجاعه بتنسيق Markdown ويمكنه استخدام صيغتين فقط: عنوان Markdown وقائمة غير مرتبة. يمكن أن يدعم التداخل متعدد المستويات. ما عليك سوى إرجاع المحتوى.',
+    aiCreatePart: 'متابعة بالذكاء الاصطناعي'
+  },
+  note: {
+    title: 'ملاحظة'
+  },
+  nodeLink: {
+    linkToNode: 'ربط بعقدة',
+    addReturn: 'هل تريد إضافة رابط خلفي',
+    tip1: 'الرجاء تحديد العقدة المراد الربط بها',
+    tip2: 'لا يمكن الربط بالنفس',
+    tip3: 'تم الربط بنجاح',
+    tip4: 'تم الحذف بنجاح',
+    tip5: 'العقدة المرتبطة غير موجودة. هل تريد حذف الرابط؟'
+  }
+}
