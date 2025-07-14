@@ -7,51 +7,51 @@
 [![GitHub stars](https://img.shields.io/github/stars/wanglin2/mind-map)](https://github.com/wanglin2/mind-map/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/wanglin2/mind-map)](https://github.com/wanglin2/mind-map/network/members)
 
-> 中文名：思绪思维导图。一个简单&强大的 Web 思维导图库和思维导图软件。
+> English Name: Mind Map. A simple & powerful web mind mapping library and mind mapping software.
 
-本项目主要包含以下内容：
+This project mainly includes the following:
 
-- 一个 `js` 思维导图库，不依赖任何框架，可以用来快速完成 Web 思维导图产品的开发。
+- A `js` mind map library that doesn't depend on any framework, which can be used to quickly develop web mind map products.
 
->  开发文档：[https://wanglin2.github.io/mind-map-docs/](https://wanglin2.github.io/mind-map-docs/)
+> Development Documentation: [https://wanglin2.github.io/mind-map-docs/](https://wanglin2.github.io/mind-map-docs/)
 
-- 一个 Web 思维导图，基于思维导图库、`Vue2.x`、`ElementUI` 开发，支持操作电脑本地文件，可以当做一个在线版思维导图应用使用，也可以自部署和二次开发。
+- A web-based mind map application, developed based on the mind map library, `Vue2.x`, and `ElementUI`. It supports operating local computer files and can be used as an online mind map application, or self-hosted and further developed.
 
->  在线地址：[https://wanglin2.github.io/mind-map/](https://wanglin2.github.io/mind-map/)
+> Online Address: [https://wanglin2.github.io/mind-map/](https://wanglin2.github.io/mind-map/)
 
-- 客户端和插件
+- Client and Plugins
 
-> 1.独立客户端，支持Windows、Mac及Linux系统。
+> 1. Standalone client, supporting Windows, Mac, and Linux systems.
 >
-> 下载地址：[Github](https://github.com/wanglin2/mind-map/releases)、[百度云盘](https://pan.baidu.com/s/1huasEbKsGNH2Af68dvWiOg?pwd=3bp3)
+> Download: [Github](https://github.com/wanglin2/mind-map/releases), [Baidu Netdisk](https://pan.baidu.com/s/1huasEbKsGNH2Af68dvWiOg?pwd=3bp3)
 
-> 2.`uTools`插件，现已上架[uTools](https://www.u.tools/)插件应用市场。
+> 2. `uTools` plugin, now available in the [uTools](https://www.u.tools/) plugin marketplace.
 >
-> 可直接在`uTools`插件应用市场中搜索`思绪`进行安装，也可以直接访问该地址：[主页](https://www.u-tools.cn/plugins/detail/%E6%80%9D%E7%BB%AA%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/)，点击右侧的【启动】按钮进行安装。
+> You can search for `Mind Map` in the `uTools` plugin marketplace to install, or directly visit this link: [Homepage](https://www.u-tools.cn/plugins/detail/%E6%80%9D%E7%BB%AA%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/), and click the 【Start】 button on the right to install.
 
-> 3.`obsidian`插件，首个版本现已发布：
+> 3. `obsidian` plugin, the first version has been released:
 >
-> 下载地址：[https://github.com/wanglin2/obsidian-simplemindmap/releases](https://github.com/wanglin2/obsidian-simplemindmap/releases)
+> Download: [https://github.com/wanglin2/obsidian-simplemindmap/releases](https://github.com/wanglin2/obsidian-simplemindmap/releases)
 
-- 云存储版本，如果你需要带后端的云存储版本，可以尝试我们开发的另一个项目[理想文档](https://github.com/wanglin2/lx-doc)。
+- Cloud storage version: If you need a version with backend cloud storage, you can try our other project [Ideal Document](https://github.com/wanglin2/lx-doc).
 
-# 特性
+# Features
 
-- [x] 插件化架构，除核心功能外，其他功能作为插件提供，按需使用，减小打包体积
-- [x] 支持逻辑结构图（向左、向右逻辑结构图）、思维导图、组织结构图、目录组织图、时间轴（横向、竖向）、鱼骨图等结构
-- [x] 内置多种主题，允许高度自定义样式，支持注册新主题
-- [x] 节点内容支持文本（普通文本、富文本）、图片、图标、超链接、备注、标签、概要、数学公式
-- [x] 节点支持拖拽（拖拽移动、自由调整）、多种节点形状；支持扩展节点内容、支持使用 DDM 完全自定义节点内容
-- [x] 支持画布拖动、缩放
-- [x] 支持鼠标按键拖动选择和 Ctrl+左键两种多选节点方式
-- [x] 支持导出为`json`、`png`、`svg`、`pdf`、`markdown`、`xmind`、`txt`，支持从`json`、`xmind`、`markdown`导入
-- [x] 支持快捷键、前进后退、关联线、搜索替换、小地图、水印、滚动条、手绘风格、彩虹线条、标记、外框
-- [x] 提供丰富的配置，满足各种场景各种使用习惯
-- [x] 支持协同编辑
-- [x] 支持演示模式
-- [x] 更多功能等你来发现
+- [x] Plugin-based architecture, with core functionality and additional features provided as plugins for on-demand use, reducing bundle size
+- [x] Supports various structures including logic diagrams (left, right), mind maps, organizational charts, directory organization charts, timelines (horizontal, vertical), fishbone diagrams, etc.
+- [x] Built-in multiple themes, allowing highly customizable styles, supports registering new themes
+- [x] Node content supports text (plain text, rich text), images, icons, hyperlinks, notes, tags, summaries, and mathematical formulas
+- [x] Nodes support drag-and-drop (move, free adjustment), various node shapes; supports extending node content, fully customizable node content using DDM
+- [x] Supports canvas dragging and zooming
+- [x] Supports two methods for multi-selecting nodes: mouse button drag selection and Ctrl+left click
+- [x] Supports exporting to `json`, `png`, `svg`, `pdf`, `markdown`, `xmind`, `txt`, and importing from `json`, `xmind`, `markdown`
+- [x] Supports keyboard shortcuts, undo/redo, associative lines, search and replace, minimap, watermark, scrollbars, hand-drawn style, rainbow lines, markers, and borders
+- [x] Provides rich configurations to meet various usage habits in different scenarios
+- [x] Supports collaborative editing
+- [x] Supports presentation mode
+- [x] More features waiting for you to discover
 
-官方提供了如下插件，可根据需求按需引入（某个功能不生效大概率是因为你没有引入对应的插件），具体使用方式请查看文档：
+The following official plugins are available and can be imported as needed (if a feature doesn't work, it's likely because you haven't imported the corresponding plugin). Please refer to the documentation for specific usage:
 
 | RichText（节点富文本插件）           | Select（鼠标多选节点插件）                | Drag（节点拖拽插件）                 | AssociativeLine（关联线插件）        |
 | ------------------------------------ | ----------------------------------------- | ------------------------------------ | ------------------------------------ |
@@ -60,30 +60,29 @@
 | Scrollbar（滚动条插件）              | Formula（数学公式插件）                   | Cooperate（协同编辑插件）            | RainbowLines（彩虹线条插件）         |
 | Demonstrate（演示模式插件）          | OuterFrame（外框插件）                    | MindMapLayoutPro（思维导图布局插件） |                                      |
 
+Features that will not be implemented in this project:
 
-本项目不会实现的特性：
-
-> 1.自由节点，即多个根节点；
+> 1. Free nodes, i.e., multiple root nodes;
 >
-> 2.概要节点后面继续添加节点；
+> 2. Adding nodes after summary nodes;
 >
-> 如果你需要以上特性，那么本库可能无法满足你的需求。
+> If you need the above features, this library may not meet your requirements.
 
-# 安装
+# Installation
 
 ```bash
 npm i simple-mind-map
 ```
 
-# 使用
+# Usage
 
-提供一个宽高不为 0 的容器元素：
+Provide a container element with non-zero width and height:
 
 ```html
 <div id="mindMapContainer"></div>
 ```
 
-另外再设置一下`css`样式：
+Also, set up the `css` styles:
 
 ```css
 #mindMapContainer * {
@@ -92,7 +91,7 @@ npm i simple-mind-map
 }
 ```
 
-然后创建一个实例：
+Then create an instance:
 
 ```js
 import MindMap from "simple-mind-map";
@@ -101,26 +100,26 @@ const mindMap = new MindMap({
   el: document.getElementById("mindMapContainer"),
   data: {
     data: {
-      text: "根节点",
+      text: "Root Node",
     },
     children: [],
   },
 });
 ```
 
-即可得到一个思维导图。想要实现更多功能？可以查看[开发文档](https://wanglin2.github.io/mind-map-docs/)。
+You'll get a mind map. Want to implement more features? Check out the [Development Documentation](https://wanglin2.github.io/mind-map-docs/).
 
 # License
 
-[MIT](./LICENSE)。保留`simple-mind-map`版权声明和注明来源的情况下可随意商用，如有疑问或不想保留可联系作者通过付费的方式去除。
+[MIT](./LICENSE). You can use it commercially as long as you retain the `simple-mind-map` copyright notice and indicate the source. If you have any questions or wish to remove these requirements, please contact the author for a paid option.
 
-> 示例：可以在你应用中的关于页面、帮助页面、文档页面、开源声明等任何页面添加以下内容：
+> Example: You can add the following content to any page in your application, such as the About page, Help page, Documentation page, Open Source Notice, etc.:
 >
-> 本产品思维导图基于SimpleMindMap项目开发，版权归源项目所有，[开源协议](https://github.com/wanglin2/mind-map/blob/main/LICENSE)。
+> The mind map in this product is developed based on the SimpleMindMap project. All rights belong to the original project, [Open Source License](https://github.com/wanglin2/mind-map/blob/main/LICENSE).
 
-# 微信交流群
+# WeChat Group
 
-微信添加`wanglinguanfang`拉你入群。根据过往的经验，大部分问题都可以通过查看issue列表或文档解决，所以提问前请确保你已经阅读完了所有文档，文档里没有的可在群里提问，不必私聊作者，如果你一定要私聊，请先赞助本项目（￥200+）。
+Add `wanglinguanfang` on WeChat to join the group. Based on past experience, most issues can be resolved by checking the issue list or documentation. Therefore, please make sure you've read all the documentation before asking questions. If your question isn't covered in the documentation, feel free to ask in the group instead of private messaging the author. If you must contact the author privately, please sponsor this project first (￥200+).
 
 <table>
     <tr>
@@ -128,23 +127,21 @@ const mindMap = new MindMap({
             <a href="http://drawon.cn/">
                 <img src="./web/src/assets/img/gzh.jpeg" width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px"/>
                 <br />
-                <sub style="font-size:14px"><b>微信公众号</b></sub>
+                <sub style="font-size:14px"><b>WeChat Official Account</b></sub>
             </a>
         </td>
     </tr>
 </table>
 
-# star
-
-如果喜欢本项目，欢迎点个 star，这对我们很重要。
+If you like this project, please give it a star. It means a lot to us.
 
 [![Star History Chart](https://api.star-history.com/svg?repos=wanglin2/mind-map&type=Date)](https://star-history.com/#wanglin2/mind-map&Date)
 
-# 关于定制
+# About Customization
 
-如果你有个性化的商用定制需求，可以联系我们，我们提供付费开发服务，无论前端、后端、还是部署，都可以帮你一站式搞定。
+If you have personalized commercial customization needs, you can contact us. We provide paid development services, whether it's frontend, backend, or deployment, we can help you with a one-stop solution.
 
-# 谁在使用
+# Who's Using This
 
 <table>
     <tr>
@@ -152,26 +149,26 @@ const mindMap = new MindMap({
             <a href="http://drawon.cn/">
                 <img src="./web/src/assets/avatar/桌案.jpg" width="50;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px"/>
                 <br />
-                <sub style="font-size:14px"><b>drawon.cn(桌案)</b></sub>
+                <sub style="font-size:14px"><b>drawon.cn (桌案)</b></sub>
             </a>
         </td>
     </tr>
 </table>
 
-# 请作者喝杯咖啡
+# Buy Me a Coffee
 
-开源不易，如果本项目有帮助到你的话，可以考虑请作者喝杯咖啡~你的赞助对项目的可持续发展非常重要，是作者持续维护的最大动力。
+Open source is not easy. If this project has helped you, consider buying the author a coffee~ Your sponsorship is very important for the sustainable development of the project and is the greatest motivation for the author to continue maintenance.
 
-> 推荐使用支付宝，微信获取不到头像。转账请备注【思维导图赞助】。
+> Alipay is recommended as WeChat cannot retrieve avatars. Please add the note 【Mind Map Sponsorship】 when transferring.
 
-> 赞助等级：最强王者（￥500+）、星耀赞助（￥300+）、钻石赞助（￥200+）、黄金赞助（￥100+）、青铜赞助
+> Sponsorship Levels: Challenger (￥500+), Grandmaster (￥300+), Diamond (￥200+), Gold (￥100+), Bronze
 
 <p>
   <img src="./web/src/assets/img/alipay.jpg" style="width: 300px" />
   <img src="./web/src/assets/img/wechat.jpg" style="width: 300px" />
 </p>
 
-## 最强王者
+## Challenger
 
 <table>
     <tr>
@@ -185,7 +182,7 @@ const mindMap = new MindMap({
     </tr>
 </table>
 
-## 钻石赞助
+## Diamond Sponsors
 
 <table>
     <tr>
@@ -213,7 +210,7 @@ const mindMap = new MindMap({
     </tr>
 </table>
 
-## 黄金赞助
+## Gold Sponsors
 
 <table>
     <tr>
@@ -399,7 +396,7 @@ const mindMap = new MindMap({
     </tr>
 </table>
 
-## 青铜赞助
+## Bronze Sponsors
 
 <table>
     <tr>
