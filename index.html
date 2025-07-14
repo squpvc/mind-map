@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
-  <link rel="icon" href="dist/logo.ico">
-  <title>Mind Map</title>
-  <script>
-    // Custom static resource path
-    window.externalPublicPath = './dist/';
-    // Take over application
-    window.takeOverApp = false;
-  </script>
-  <script charset="UTF-8" id="LA_COLLECT" src="https://sdk.51.la/js-sdk-pro.min.js"></script><script>try {
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=dist/logo.ico><title>Thoughts Mind Map</title><script>// Custom static resource path
+      window.externalPublicPath = './dist/'
+      // Take over application
+      window.takeOverApp = false</script><script charset=UTF-8 id=LA_COLLECT src=https://sdk.51.la/js-sdk-pro.min.js></script><script>try {
         LA.init({
           id: 'KRO0WxK8GT66tYCQ',
           ck: 'KRO0WxK8GT66tYCQ',
@@ -20,7 +9,7 @@
         })
       } catch (error) {
         console.log(error)
-      }</script><link href="dist/css/chunk-vendors.css?227f61428db154a5d9bc" rel="stylesheet"><link href="dist/css/app.css?227f61428db154a5d9bc" rel="stylesheet"></head><body><noscript><strong>We're sorry but thoughts doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script>const getDataFromBackend = () => {
+      }</script><link href=dist/css/chunk-vendors~f6dc1b74.6b92dc4c.css?6c60196255c49f660318 rel=stylesheet><link href=dist/css/chunk-vendors~5068d5f8.74eca9f0.css?6c60196255c49f660318 rel=stylesheet><link href=dist/css/app~d0ae3f07.fc883365.css?6c60196255c49f660318 rel=stylesheet></head><body><noscript><strong>We're sorry but thoughts doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script>const getDataFromBackend = () => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve({
@@ -56,7 +45,7 @@
         window.takeOverAppMethods.saveMindMapData = data => {
           console.log(data)
         }
-        // Get mind map configuration, which are the options passed during instantiation
+        // Function to get mind map configuration, which are the options passed during instantiation
         window.takeOverAppMethods.getMindMapConfig = () => {
           return data.mindMapConfig
         }
@@ -87,16 +76,11 @@
         const data = await getDataFromBackend()
         // Set global methods
         setTakeOverAppMethods(data)
-        // Mind map instance creation completed event
+        // Mind map instance creation completion event
         window.$bus.$on('app_inited', mindMap => {
           console.log(mindMap)
         })
-        // You can listen to some application events via window.$bus.$on()
+        // You can use window.$bus.$on() to listen to application events
         // Instantiate the page
-        window.initApp();
-      }
-  </script>
-  <script src="dist/js/chunk-vendors.js?227f61428db154a5d9bc"></script>
-  <script src="dist/js/app.js?227f61428db154a5d9bc"></script>
-</body>
-</html>
+        window.initApp()
+      }</script><script src=dist/js/chunk-vendors~53ce07de.b51a536a.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~c7b8ce09.39ff9cf9.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~2a42e354.6cd3c3b3.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~b5906859.9ffead53.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~6ed3fd28.b6551aa5.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~9ad0f35b.df15aeb3.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~fe785c75.e4454058.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~f6dc1b74.c6642c85.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~7bcc931c.24d71120.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~b58f7129.fcfed37f.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~fdc6512a.93e5d5ab.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~5068d5f8.f957bd6f.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~0605657e.334bf7f6.js?6c60196255c49f660318></script><script src=dist/js/chunk-vendors~d2305125.7ad9d773.js?6c60196255c49f660318></script><script src=dist/js/app~d0ae3f07.0d0e6de5.js?6c60196255c49f660318></script></body></html>
