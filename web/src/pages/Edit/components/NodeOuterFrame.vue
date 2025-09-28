@@ -12,7 +12,7 @@
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('nodeOuterFrame.boxStyle') }}</span>
-            <!-- Width -->
+            <!-- 宽度 -->
             <el-select
               size="mini"
               style="width: 80px"
@@ -38,7 +38,7 @@
                 ></span>
               </el-option>
             </el-select>
-            <!-- Implement dashed line -->
+            <!-- 实现虚线 -->
             <el-select
               size="mini"
               style="width: 80px;margin-left: 4px;"
@@ -447,7 +447,7 @@ export default {
     ...mapMutations(['setActiveSidebar']),
 
     onOuterFrameActive(el, parentNode, range) {
-      // Get the outer frame style of the first node in the range
+      // 取范围内第一个节点的外框样式
       const firstNode = parentNode.children[range[0]]
       const firstNodeOuterFrame = firstNode.getData('outerFrame')
       Object.keys(this.styleConfig).forEach(key => {
@@ -470,14 +470,14 @@ export default {
       })
     },
 
-    // Toggle bold style
+    // 切换加粗样式
     toggleFontWeight() {
       const newValue =
         this.styleConfig.fontWeight === 'bold' ? 'normal' : 'bold'
       this.updateOuterFrame('fontWeight', newValue)
     },
 
-    // Toggle font style
+    // 切换字体样式
     toggleFontStyle() {
       const newValue =
         this.styleConfig.fontStyle === 'italic' ? 'normal' : 'italic'

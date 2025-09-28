@@ -30,7 +30,7 @@ import { mapState } from 'vuex'
 import { layoutImgMap } from '@/config/constant.js'
 import { layoutGroupList } from '@/config'
 
-// Structure
+// 结构
 export default {
   components: {
     Sidebar

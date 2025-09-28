@@ -8,7 +8,7 @@
           @dragenter.stop.prevent
           @dragover.stop.prevent
           @drop.stop.prevent="onDrop"
-          >点击此处选择图片、或拖动图片到此</label
+          >{{ $t('imgUpload.uploadPrompt') }}</label
         >
         <input
           type="file"
@@ -46,20 +46,20 @@ export default {
     }
   },
   methods: {
-    // 图片选择事件
+    // Image selection event // 图片选择事件
     onImgUploadInputChange(e) {
       let file = e.target.files[0]
       this.selectImg(file)
     },
 
-    // 拖动上传图片
+    // Drag and drop to upload image // 拖动上传图片
     onDrop(e) {
       let dt = e.dataTransfer
       let file = dt.files && dt.files[0]
       this.selectImg(file)
     },
 
-    // 选择图片
+    // Select image // 选择图片
     selectImg(file) {
       this.file = file
       let fr = new FileReader()
@@ -69,7 +69,7 @@ export default {
       }
     },
 
-    // 获取图片大小
+    // Get image size // 获取图片大小
     getSize() {
       return new Promise(resolve => {
         let img = new Image()
@@ -89,7 +89,7 @@ export default {
       })
     },
 
-    // 删除图片
+    // Delete image // 删除图片
     deleteImg() {
       this.$emit('change', '')
       this.file = null

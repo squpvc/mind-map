@@ -19,7 +19,7 @@
 import { store } from '@/config'
 import { mapState, mapMutations } from 'vuex'
 
-// Sidebar container
+// 侧边栏容器
 export default {
   props: {
     title: {

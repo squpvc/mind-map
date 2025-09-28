@@ -5,7 +5,7 @@
       :class="{ isDark: isDark }"
       v-if="data"
     >
-      <!-- Background -->
+      <!-- 背景 -->
       <div class="title noTop">{{ $t('baseStyle.background') }}</div>
       <div class="row">
         <el-tabs class="tab" v-model="activeTab">
@@ -29,7 +29,7 @@
                 }
               "
             ></ImgUpload>
-            <!-- Image repeat mode -->
+            <!-- 图片重复方式 -->
             <div class="rowItem">
               <span class="name">{{ $t('baseStyle.imageRepeat') }}</span>
               <el-select
@@ -52,7 +52,7 @@
                 </el-option>
               </el-select>
             </div>
-            <!-- Image position -->
+            <!-- 图片位置 -->
             <div class="rowItem">
               <span class="name">{{ $t('baseStyle.imagePosition') }}</span>
               <el-select
@@ -75,7 +75,7 @@
                 </el-option>
               </el-select>
             </div>
-            <!-- Image size -->
+            <!-- 图片大小 -->
             <div class="rowItem">
               <span class="name">{{ $t('baseStyle.imageSize') }}</span>
               <el-select
@@ -98,7 +98,7 @@
                 </el-option>
               </el-select>
             </div>
-            <!-- Built-in background images -->
+            <!-- 内置背景图片 -->
             <div
               class="rowItem spaceBetween"
               style="margin-top: 8px; margin-bottom: 8px;"
@@ -125,7 +125,7 @@
           </el-tab-pane>
         </el-tabs>
       </div>
-      <!-- Connections -->
+      <!-- 连线 -->
       <div class="title">{{ $t('baseStyle.line') }}</div>
       <div class="row">
         <div class="rowItem">
@@ -176,7 +176,7 @@
         </div>
       </div>
       <div class="row">
-        <!-- Line width -->
+        <!-- 线宽 -->
         <div class="rowItem" v-if="lineStyleListShow.length > 1">
           <span class="name">{{ $t('baseStyle.style') }}</span>
           <el-select
@@ -205,7 +205,7 @@
             </el-option>
           </el-select>
         </div>
-        <!-- Root node connection style -->
+        <!-- 根节点连线样式 -->
         <div
           class="rowItem"
           v-if="
@@ -234,7 +234,7 @@
           </el-select>
         </div>
         <div class="rowItem" v-if="showLineRadius">
-          <!-- Connection corner radius -->
+          <!-- 连线圆角大小 -->
           <span class="name">{{ $t('baseStyle.lineRadius') }}</span>
           <el-select
             size="mini"
@@ -258,7 +258,7 @@
         </div>
       </div>
       <div class="row">
-        <!-- Root node connection start position -->
+        <!-- 根节点连线起始位置 -->
         <div
           class="rowItem"
           v-if="
@@ -301,7 +301,7 @@
           >
         </div>
       </div>
-      <!-- Rainbow lines -->
+      <!-- 彩虹线条 -->
       <div class="title">{{ $t('baseStyle.rainbowLines') }}</div>
       <div class="row">
         <div class="rowItem">
@@ -345,7 +345,7 @@
           </el-popover>
         </div>
       </div>
-      <!-- Summary connections -->
+      <!-- 概要连线 -->
       <div class="title">{{ $t('baseStyle.lineOfOutline') }}</div>
       <div class="row">
         <div class="rowItem">
@@ -395,7 +395,7 @@
           </el-select>
         </div>
       </div>
-      <!-- Associative lines -->
+      <!-- 关联线 -->
       <div class="title">{{ $t('baseStyle.associativeLine') }}</div>
       <div class="row">
         <div class="rowItem">
@@ -538,7 +538,7 @@
           </el-select>
         </div>
       </div>
-      <!-- Associative line text -->
+      <!-- 关联线文字 -->
       <div class="title">{{ $t('baseStyle.associativeLineText') }}</div>
       <div class="row">
         <div class="rowItem">
@@ -599,7 +599,7 @@
           </el-select>
         </div>
       </div>
-      <!-- Node border style -->
+      <!-- 节点边框风格 -->
       <template v-if="showNodeUseLineStyle">
         <div class="title">{{ $t('baseStyle.nodeBorderType') }}</div>
         <div class="row">
@@ -616,7 +616,7 @@
           </div>
         </div>
       </template>
-      <!-- Padding -->
+      <!-- 内边距 -->
       <div class="title">{{ $t('baseStyle.nodePadding') }}</div>
       <div class="row noBottom">
         <div class="rowItem">
@@ -646,7 +646,7 @@
           ></el-slider>
         </div>
       </div>
-      <!-- Images -->
+      <!-- 图片 -->
       <div class="title">{{ $t('baseStyle.image') }}</div>
       <div class="row noBottom">
         <div class="rowItem">
@@ -680,7 +680,7 @@
           ></el-slider>
         </div>
       </div>
-      <!-- Icons -->
+      <!-- 图标 -->
       <div class="title">{{ $t('baseStyle.icon') }}</div>
       <div class="row">
         <div class="rowItem">
@@ -698,7 +698,7 @@
           ></el-slider>
         </div>
       </div>
-      <!-- Second-level node margins -->
+      <!-- 二级节点外边距 -->
       <div class="title">{{ $t('baseStyle.nodeMargin') }}</div>
       <div class="row column noBottom">
         <el-tabs
@@ -742,7 +742,7 @@
           ></el-slider>
         </div>
       </div>
-      <!-- Outer frame padding -->
+      <!-- 外框内边距 -->
       <div class="title">{{ $t('baseStyle.outerFramePadding') }}</div>
       <div class="row noBottom">
         <div class="rowItem">
@@ -802,7 +802,7 @@ import {
   rainbowLinesOptions
 } from '@/config/constant'
 
-// Base styles
+// 基础样式
 export default {
   components: {
     Sidebar,
@@ -865,7 +865,7 @@ export default {
       },
       rainbowLinesPopoverVisible: false,
       curRainbowLineColorList: null,
-      currentLayout: '', // Current structure
+      currentLayout: '', // 当前结构
       outerFramePadding: {
         outerFramePaddingX: 0,
         outerFramePaddingY: 0
@@ -971,7 +971,7 @@ export default {
       }, 0)
     },
 
-    // Initial style
+    // 初始样式
     initStyle() {
       Object.keys(this.style).forEach(key => {
         this.style[key] = this.mindMap.getThemeConfig(key)
@@ -982,7 +982,7 @@ export default {
       this.initMarginStyle()
     },
 
-    // Initialize rainbow line configuration
+    // 初始化彩虹线条配置
     initRainbowLines() {
       const config = this.mindMap.getConfig('rainbowLinesConfig') || {}
       this.curRainbowLineColorList = config.open
@@ -992,7 +992,7 @@ export default {
         : null
     },
 
-    // Outer frame
+    // 外框
     initOuterFramePadding() {
       this.outerFramePadding.outerFramePaddingX = this.mindMap.getConfig(
         'outerFramePaddingX'
@@ -1002,7 +1002,7 @@ export default {
       )
     },
 
-    // Initial margin values
+    // margin初始值
     initMarginStyle() {
       ;['marginX', 'marginY'].forEach(key => {
         this.style[key] = this.mindMap.getThemeConfig()[this.marginActiveTab][
@@ -1011,7 +1011,7 @@ export default {
       })
     },
 
-    // Update configuration
+    // 更新配置
     update(key, value) {
       if (key === 'backgroundImage' && value === 'none') {
         this.style[key] = ''
@@ -1029,7 +1029,7 @@ export default {
       })
     },
 
-    // Update rainbow line configuration
+    // 更新彩虹线条配置
     updateRainbowLinesConfig(item) {
       this.rainbowLinesPopoverVisible = false
       this.curRainbowLineColorList = item.list || null
@@ -1049,7 +1049,7 @@ export default {
       storeConfig(this.configData)
     },
 
-    // Update outer frame
+    // 更新外框
     updateOuterFramePadding(prop, value) {
       this.outerFramePadding[prop] = value
       this.configData[prop] = value
@@ -1060,7 +1060,7 @@ export default {
       this.mindMap.render()
     },
 
-    // Set margins
+    // 设置margin
     updateMargin(type, value) {
       this.style[type] = value
       if (!this.data.theme.config[this.marginActiveTab]) {

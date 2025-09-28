@@ -12,7 +12,7 @@
         ></el-tab-pane>
       </el-tabs>
       <div class="boxContent">
-        <!-- Icons -->
+        <!-- 图标 -->
         <div class="iconBox" v-if="activeName === 'icon'">
           <div class="item" v-for="item in nodeIconList" :key="item.name">
             <div class="title">{{ item.name }}</div>
@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        <!-- Stickers -->
+        <!-- 贴纸 -->
         <div class="imageBox" v-if="activeName === 'image'">
           <div class="item" v-for="item in nodeImageList" :key="item.name">
             <div class="title">{{ item.name }}</div>
@@ -106,7 +106,7 @@ export default {
         if (this.activeNodes.length === 1) {
           let firstNode = this.activeNodes[0]
           this.nodeImage = firstNode.getData('image') || ''
-          this.iconList = firstNode.getData('icon') || [] // Echo icon
+          this.iconList = firstNode.getData('icon') || [] // 回显图标
         } else {
           this.nodeImage = []
           this.iconList = []
@@ -121,12 +121,12 @@ export default {
       this.dialogVisible = true
     },
 
-    // Get icon rendering method
+    // 获取图标渲染方式
     getHtml(icon) {
       return /^<svg/.test(icon) ? icon : `<img src="${icon}" />`
     },
 
-    // Set icon
+    // 设置icon
     setIcon(type, name) {
       this.activeNodes.forEach(node => {
         const iconList = [...(node.getData('icon') || [])]
@@ -134,18 +134,18 @@ export default {
         let index = iconList.findIndex(item => {
           return item === key
         })
-        // Remove icon
+        // 删除icon
         if (index !== -1) {
           iconList.splice(index, 1)
         } else {
           let typeIndex = iconList.findIndex(item => {
             return item.split('_')[0] === type
           })
-          // Replace icon
+          // 替换icon
           if (typeIndex !== -1) {
             iconList.splice(typeIndex, 1, key)
           } else {
-            // Add icon
+            // 增加icon
             iconList.push(key)
           }
         }
@@ -156,7 +156,7 @@ export default {
       })
     },
 
-    // Set sticker
+    // 设置贴纸
     setImage(image) {
       this.activeNodes.forEach(node => {
         this.nodeImage = image.url

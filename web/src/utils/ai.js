@@ -1,67 +1,27 @@
 class Ai {
   constructor(options = {}) {
     this.options = options
-    this.provider = null
+
     this.baseData = {}
     this.controller = null
     this.currentChunk = ''
     this.content = ''
   }
 
-  init(type = 'volcano', options = {}) {
-    this.provider = type
-    
-    switch (type) {
-      case 'volcano':
-        // Volcano Engine API
-        this.baseData = {
-          api: options.api,
-          method: options.method || 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${options.key}`
-          },
-          data: {
-            model: options.model || 'volc-ark',
-            stream: true
-          }
+  init(type = 'huoshan', options = {}) {
+    // Volcano Engine API // 火山引擎接口
+    if (type === 'huoshan') {
+      this.baseData = {
+        api: options.api,
+        method: options.method,
+        headers: {
+          Authorization: 'Bearer ' + options.key
+        },
+        data: {
+          model: options.model,
+          stream: true
         }
-        break
-        
-      case 'openai':
-        // OpenAI API
-        this.baseData = {
-          api: options.api || 'https://api.openai.com/v1/chat/completions',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${options.key}`
-          },
-          data: {
-            model: options.model || 'gpt-3.5-turbo',
-            stream: true
-          }
-        }
-        break
-        
-      case 'deepseek':
-        // DeepSeek API
-        this.baseData = {
-          api: options.api || 'https://api.deepseek.com/v1/chat/completions',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${options.key}`
-          },
-          data: {
-            model: options.model || 'deepseek-chat',
-            stream: true
-          }
-        }
-        break
-        
-      default:
-        throw new Error(`Unsupported AI provider: ${type}`)
+      }
     }
   }
 
@@ -74,11 +34,11 @@ class Ai {
         if (done) {
           return
         }
-        // Get current chunk data
+        // Get the data of the current slice // 拿到当前切片的数据
         const text = decoder.decode(value)
-        // Process chunk data
+        // Process slice data // 处理切片数据
         let chunk = this.handleChunkData(text)
-        // Check for incomplete chunks, if any, merge with next chunk; otherwise process data
+        // Check if there is an incomplete slice, if yes, merge with the next processing, otherwise get the data // 判断是否有不完整切片，如果有，合并下一次处理，没有则获取数据
         if (this.currentChunk) continue
         let isEnd = false
         const list = chunk
@@ -88,27 +48,14 @@ class Ai {
             return !!item && !isEnd
           })
           .map(item => {
-            try {
-              return JSON.parse(item.replace(/^data:/, ''))
-            } catch (e) {
-              console.error('Error parsing chunk:', item)
-              return null
-            }
+            return JSON.parse(item.replace(/^data:/, ''))
           })
-          .filter(Boolean) // Remove any null entries from parsing errors
-        
         list.forEach(item => {
-          if (this.provider === 'volcano') {
-            // Volcano format
-            this.content += item.choices
-              .map(choice => choice.delta?.content || '')
-              .join('')
-          } else if (this.provider === 'openai' || this.provider === 'deepseek') {
-            // OpenAI/DeepSeek format
-            this.content += item.choices
-              .map(choice => choice.delta?.content || '')
-              .join('')
-          }
+          this.content += item.choices
+            .map(item2 => {
+              return item2.delta.content
+            })
+            .join('')
         })
         progress(this.content)
         if (isEnd) {
@@ -117,7 +64,7 @@ class Ai {
       }
     } catch (error) {
       console.log(error)
-      // Manual stop request doesn't need to trigger error callback
+      // Manual stop request does not need to trigger error callback // 手动停止请求不需要触发错误回调
       if (!(error && error.name === 'AbortError')) {
         err(error)
       }
@@ -126,55 +73,38 @@ class Ai {
 
   async postMsg(data) {
     this.controller = new AbortController()
-    const requestData = {
-      ...this.baseData,
-      data: {
-        ...this.baseData.data,
-        ...data
-      }
-    }
-    
-    // Format messages based on provider requirements
-    if (this.provider === 'openai' || this.provider === 'deepseek') {
-      if (data.messages) {
-        requestData.data.messages = data.messages
-      } else if (data.prompt) {
-        requestData.data.messages = [{
-          role: 'user',
-          content: data.prompt
-        }]
-      }
-    }
-    
     const res = await fetch(`http://localhost:${this.options.port}/ai/chat`, {
       signal: this.controller.signal,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestData)
+      body: JSON.stringify({
+        ...this.baseData,
+        data: {
+          ...this.baseData.data,
+          ...data
+        }
+      })
     })
-    
     if (res.status && res.status !== 200) {
-      const error = await res.json().catch(() => ({}))
-      throw new Error(error.message || 'Request failed')
+      throw new Error('Request failed') // 请求失败
     }
-    
     return res.body.getReader()
   }
 
   handleChunkData(chunk) {
     chunk = chunk.trim()
-    // If there is a previous chunk
+    // If there is a previous slice // 如果存在上一个切片
     if (this.currentChunk) {
       chunk = this.currentChunk + chunk
       this.currentChunk = ''
     }
-    // If 'done' exists, consider it a complete chunk and the last one
+    // If done exists, it is considered a complete slice and the last slice // 如果存在done,认为是完整切片且是最后一个切片
     if (chunk.includes('[DONE]')) {
       return chunk
     }
-    // If the last character is not '}', the chunk is considered incomplete and saved for the next concatenation (this method is not rigorous but solves most scenarios)
+    // If the last character is not }, the slice is considered incomplete, save it for concatenation with the next slice (this method is not rigorous but solves most scenarios) // 最后一个字符串不为}，则默认切片不完整，保存与下次拼接使用（这种方法不严谨，但已经能解决大部分场景的问题）
     if (chunk[chunk.length - 1] !== '}') {
       this.currentChunk = chunk
     }

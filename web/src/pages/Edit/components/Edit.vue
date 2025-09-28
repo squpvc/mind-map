@@ -88,7 +88,7 @@ import OuterFrame from 'simple-mind-map/src/plugins/OuterFrame.js'
 import MindMapLayoutPro from 'simple-mind-map/src/plugins/MindMapLayoutPro.js'
 import NodeBase64ImageStorage from 'simple-mind-map/src/plugins/NodeBase64ImageStorage.js'
 import Themes from 'simple-mind-map-plugin-themes'
-// Collaborative editing plugin
+// 协同编辑插件
 // import Cooperate from 'simple-mind-map/src/plugins/Cooperate.js'
 import OutlineSidebar from './OutlineSidebar.vue'
 import Style from './Style.vue'
@@ -127,7 +127,7 @@ import NodeNoteSidebar from './NodeNoteSidebar.vue'
 import AiCreate from './AiCreate.vue'
 import AiChat from './AiChat.vue'
 
-// Register plugins
+// 注册插件
 MindMap.usePlugin(MiniMap)
   .usePlugin(Watermark)
   .usePlugin(Drag)
@@ -147,11 +147,11 @@ MindMap.usePlugin(MiniMap)
   .usePlugin(OuterFrame)
   .usePlugin(MindMapLayoutPro)
   .usePlugin(NodeBase64ImageStorage)
-// .usePlugin(Cooperate) // Collaboration plugin
+// .usePlugin(Cooperate) // 协同插件
 
-// Register themes
+// 注册主题
 Themes.init(MindMap)
-// Extended theme list
+// 扩展主题列表
 if (typeof MoreThemes !== 'undefined') {
   MoreThemes.init(MindMap)
 }
@@ -292,13 +292,13 @@ export default {
       this.mindMap.resize()
     },
 
-    // Show loading
+    // 显示loading
     handleShowLoading() {
       this.enableShowLoading = true
       showLoading()
     },
 
-    // Close loading after rendering is complete
+    // 渲染结束后关闭loading
     handleHideLoading() {
       if (this.enableShowLoading) {
         this.enableShowLoading = false
@@ -306,13 +306,13 @@ export default {
       }
     },
 
-    // Get mind map data, should call API in production
+    // 获取思维导图数据，实际应该调接口获取
     getData() {
       this.mindMapData = getData()
       this.mindMapConfig = getConfig() || {}
     },
 
-    // Save data when changes occur
+    // 存储数据当数据有变时
     bindSaveEvent() {
       this.$bus.$on('data_change', data => {
         storeData({ root: data })
@@ -327,17 +327,17 @@ export default {
       })
     },
 
-    // Manual save
+    // 手动保存
     manualSave() {
       storeData(this.mindMap.getData(true))
     },
 
-    // Initialize
+    // 初始化
     init() {
       let hasFileURL = this.hasFileURL()
       let { root, layout, theme, view } = this.mindMapData
       const config = this.mindMapConfig
-      // If there is a file to open in the URL, use default mind map data, theme, and layout
+      // 如果url中存在要打开的文件，那么思维导图数据、主题、布局都使用默认的
       if (hasFileURL) {
         root = {
           data: {
@@ -377,7 +377,7 @@ export default {
         useLeftKeySelectionRightKeyDrag: this.useLeftKeySelectionRightKeyDrag,
         customInnerElsAppendTo: null,
         customHandleClipboardText: handleClipboardText,
-        defaultNodeImage: require('../../../assets/img/image-load-failed.svg'),
+        defaultNodeImage: require('../../../assets/img/图片加载失败.svg'),
         initRootNodePosition: ['center', 'center'],
         handleIsSplitByWrapOnPasteCreateNewNode: () => {
           return this.$confirm(
@@ -450,7 +450,7 @@ export default {
       this.mindMap.keyCommand.addShortcut('Control+s', () => {
         this.manualSave()
       })
-      // Forward events
+      // 转发事件
       ;[
         'node_active',
         'data_change',
@@ -484,38 +484,38 @@ export default {
         })
       })
       this.bindSaveEvent()
-      // If the app is taken over, emit an event to pass the mind map instance
+      // 如果应用被接管，那么抛出事件传递思维导图实例
       if (window.takeOverApp) {
         this.$bus.$emit('app_inited', this.mindMap)
       }
-      // Parse files in URL
+      // 解析url中的文件
       if (hasFileURL) {
         this.$bus.$emit('handle_file_url')
       }
-      // Used by api/index.js
-      // When editing local files, use this method to get the latest data
+      // api/index.js文件使用
+      // 当正在编辑本地文件时通过该方法获取最新数据
       Vue.prototype.getCurrentData = () => {
         const fullData = this.mindMap.getData(true)
         return { ...fullData }
       }
-      // Collaboration test
+      // 协同测试
       this.cooperateTest()
     },
 
-    // Load related plugins
+    // 加载相关插件
     loadPlugins() {
       if (this.openNodeRichText) this.addRichTextPlugin()
       if (this.isShowScrollbar) this.addScrollbarPlugin()
     },
 
-    // Check if there is a file to open in the URL
+    // url中是否存在要打开的文件
     hasFileURL() {
       const fileURL = this.$route.query.fileURL
       if (!fileURL) return false
       return /\.(smm|json|xmind|md|xlsx)$/.test(fileURL)
     },
 
-    // Dynamically set mind map data
+    // 动态设置思维导图数据
     setData(data) {
       this.handleShowLoading()
       let rootNodeData = null
@@ -528,7 +528,7 @@ export default {
       }
       this.mindMap.view.reset()
       this.manualSave()
-      // If the imported content is rich text, automatically enable rich text mode
+      // 如果导入的是富文本内容，那么自动开启富文本模式
       if (rootNodeData.data.richText && !this.openNodeRichText) {
         this.$bus.$emit('toggleOpenNodeRichText', true)
         this.$notify.info({
@@ -538,17 +538,17 @@ export default {
       }
     },
 
-    // Re-render
+    // 重新渲染
     reRender() {
       this.mindMap.reRender()
     },
 
-    // Execute command
+    // 执行命令
     execCommand(...args) {
       this.mindMap.execCommand(...args)
     },
 
-    // Export
+    // 导出
     async export(...args) {
       try {
         showLoading()
@@ -560,34 +560,34 @@ export default {
       }
     },
 
-    // Modify export padding
+    // 修改导出内边距
     onPaddingChange(data) {
       this.mindMap.updateConfig(data)
     },
 
-    // Load rich text editing plugin for nodes
+    // 加载节点富文本编辑插件
     addRichTextPlugin() {
       if (!this.mindMap) return
       this.mindMap.addPlugin(RichText)
     },
 
-    // Remove rich text editing plugin for nodes
+    // 移除节点富文本编辑插件
     removeRichTextPlugin() {
       this.mindMap.removePlugin(RichText)
     },
 
-    // Load scrollbar plugin
+    // 加载滚动条插件
     addScrollbarPlugin() {
       if (!this.mindMap) return
       this.mindMap.addPlugin(ScrollbarPlugin)
     },
 
-    // Remove scrollbar plugin
+    // 移除滚动条插件
     removeScrollbarPlugin() {
       this.mindMap.removePlugin(ScrollbarPlugin)
     },
 
-    // Collaboration test
+    // 协同测试
     cooperateTest() {
       if (this.mindMap.cooperate && this.$route.query.userName) {
         this.mindMap.cooperate.setProvider(null, {
@@ -608,7 +608,7 @@ export default {
       }
     },
 
-    // Import files by dragging to the page
+    // 拖拽文件到页面导入
     onDragenter() {
       if (!this.enableDragImport || this.isDragOutlineTreeNode) return
       this.showDragMask = true
@@ -627,7 +627,7 @@ export default {
       this.$bus.$emit('importFile', file)
     },
 
-    // Web version trial prompt
+    // 网页版试用提示
     webTip() {
       const storageKey = 'webUseTip'
       const data = localStorage.getItem(storageKey)
@@ -635,8 +635,8 @@ export default {
         return
       }
       this.showDownloadTip(
-        'Important Notice',
-        'The web version has been suspended for updates, some features are missing. Please download the client for the full experience~'
+        '重要提示',
+        '网页版已暂停更新，部分功能缺失，请下载客户端获得完整体验~'
       )
       localStorage.setItem(storageKey, 1)
     },

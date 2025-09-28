@@ -26,7 +26,7 @@
 import { colorList } from '@/config'
 import { mapState } from 'vuex'
 
-// Color picker
+// 颜色选择器
 export default {
   props: {
     color: {
@@ -54,12 +54,12 @@ export default {
     this.selectColor = this.color
   },
   methods: {
-    // Click on preset color
+    // 点击预设颜色
     clickColorItem(color) {
       this.$emit('change', color)
     },
 
-    // Change color
+    // 修改颜色
     changeColor() {
       this.$emit('change', this.selectColor)
     }

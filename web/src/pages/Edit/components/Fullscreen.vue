@@ -22,7 +22,7 @@
 <script>
 import { fullscrrenEvent, fullScreen } from '@/utils'
 
-// Fullscreen
+// 全屏
 export default {
   props: {
     mindMap: {
@@ -43,12 +43,12 @@ export default {
     }
   },
   methods: {
-    // View in fullscreen
+    // 全屏查看
     toFullscreenShow() {
       fullScreen(this.mindMap.el)
     },
 
-    // Edit in fullscreen
+    // 全屏编辑
     toFullscreenEdit() {
       fullScreen(document.body)
     }

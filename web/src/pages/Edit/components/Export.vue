@@ -12,9 +12,9 @@
     :top="isMobile ? '20px' : '15vh'"
   >
     <div class="exportContainer" :class="{ isDark: isDark }">
-      <!-- Export type selection -->
+      <!-- 导出类型选择 -->
       <div class="downloadTypeSelectBox">
-        <!-- Type list -->
+        <!-- 类型列表 -->
         <div class="downloadTypeList customScrollbar">
           <div
             class="downloadTypeItem"
@@ -30,9 +30,9 @@
             <div class="icon checked el-icon-check"></div>
           </div>
         </div>
-        <!-- Type content -->
+        <!-- 类型内容 -->
         <div class="downloadTypeContent">
-          <!-- File name input -->
+          <!-- 文件名称输入 -->
           <div class="nameInputBox">
             <div class="nameInput">
               <span class="name">{{ $t('export.filename') }}</span>
@@ -45,7 +45,7 @@
             </div>
             <span class="closeBtn el-icon-close" @click="cancel"></span>
           </div>
-          <!-- Configuration -->
+          <!-- 配置 -->
           <div class="contentBox customScrollbar">
             <div class="contentRow">
               <div class="contentName">{{ $t('export.format') }}</div>
@@ -61,7 +61,7 @@
             </div>
             <div class="contentRow">
               <div class="contentName">{{ $t('export.options') }}</div>
-              <div class="contentValue info" v-if="noOptions">None</div>
+              <div class="contentValue info" v-if="noOptions">无</div>
               <div class="contentValue" v-else>
                 <div
                   class="valueItem"
@@ -129,7 +129,7 @@
               </div>
             </div>
           </div>
-          <!-- Buttons -->
+          <!-- 按钮 -->
           <div class="btnList">
             <el-button @click="cancel" size="small">{{
               $t('dialog.cancel')
@@ -150,7 +150,7 @@ import { downTypeList } from '@/config'
 import { isMobile } from 'simple-mind-map/src/utils/index'
 import MarkdownIt from 'markdown-it'
 
-// Export
+// 导出
 let md = null
 export default {
   data() {

@@ -51,7 +51,7 @@ export default {
   methods: {
     ...mapMutations(['setLocalConfig']),
 
-    // Initialize local configuration
+    // 初始化本地配置
     initLocalConfig() {
       let config = getLocalConfig()
       if (config) {
@@ -72,6 +72,9 @@ export default {
 </script>
 
 <style lang="less">
+.container {
+}
+
 body {
   &.isDark {
     /* el-button */

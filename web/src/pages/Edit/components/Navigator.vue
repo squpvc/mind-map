@@ -90,7 +90,7 @@ export default {
     )
   },
   methods: {
-    // Toggle minimap display
+    // 切换显示小地图
     toggle_mini_map(show) {
       this.showMiniMap = show
       this.$nextTick(() => {
@@ -103,7 +103,7 @@ export default {
       })
     },
 
-    // Update minimap when mind map data changes
+    // 思维导图数据改变，更新小地图
     data_change() {
       if (!this.showMiniMap) {
         return
@@ -114,7 +114,7 @@ export default {
       }, 500)
     },
 
-    // Calculate container width
+    // 计算容器宽度
     setSize() {
       clearTimeout(this.setSizeTimer)
       this.setSizeTimer = setTimeout(() => {
@@ -128,14 +128,14 @@ export default {
       }, 300)
     },
 
-    // Get width and height
+    // 获取宽高
     init() {
       let { width, height } = this.$refs.navigatorBox.getBoundingClientRect()
       this.boxWidth = width
       this.boxHeight = height
     },
 
-    // Render minimap
+    // 渲染小地图
     drawMiniMap() {
       let {
         getImgUrl,
@@ -144,7 +144,7 @@ export default {
         miniMapBoxLeft,
         miniMapBoxTop
       } = this.mindMap.miniMap.calculationMiniMap(this.boxWidth, this.boxHeight)
-      // Render to minimap
+      // 渲染到小地图
       getImgUrl(img => {
         this.mindMapImg = img
       })
@@ -154,17 +154,17 @@ export default {
       this.svgBoxTop = miniMapBoxTop
     },
 
-    // Minimap mousedown event
+    // 小地图鼠标按下事件
     onMousedown(e) {
       this.mindMap.miniMap.onMousedown(e)
     },
 
-    // Minimap mousemove event
+    // 小地图鼠标移动事件
     onMousemove(e) {
       this.mindMap.miniMap.onMousemove(e)
     },
 
-    // Mouse up event, best bound to window
+    // 鼠标松开事件，最好绑定要window
     onMouseup(e) {
       if (!this.withTransition) {
         this.withTransition = true
@@ -172,17 +172,17 @@ export default {
       if (this.mindMap.miniMap) this.mindMap.miniMap.onMouseup(e)
     },
 
-    // Viewport box mousedown event
+    // 视口框的鼠标按下事件
     onViewBoxMousedown(e) {
       this.mindMap.miniMap.onViewBoxMousedown(e)
     },
 
-    // Viewport box mousemove event
+    // 视口框的鼠标移动事件
     onViewBoxMousemove(e) {
       this.mindMap.miniMap.onViewBoxMousemove(e)
     },
 
-    // Update when viewport box position or size changes
+    // 视口框的位置大小改变了，需要更新
     onViewBoxPositionChange({ left, right, top, bottom }) {
       this.withTransition = false
       this.viewBoxStyle.left = left

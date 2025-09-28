@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Client connection failure prompt popup -->
+    <!-- 客户端连接失败提示弹窗 -->
     <el-dialog
       class="clientTipDialog"
       :title="$t('ai.connectFailedTitle')"
@@ -32,7 +32,7 @@
         }}</el-button>
       </div>
     </el-dialog>
-    <!-- AI content input popup -->
+    <!-- ai内容输入弹窗 -->
     <el-dialog
       class="createDialog"
       :title="$t('ai.createMindMapTitle')"
@@ -67,7 +67,7 @@
         }}</el-button>
       </div>
     </el-dialog>
-    <!-- Add a transparent overlay during AI generation to prevent user operations -->
+    <!-- ai生成中添加一个透明层，防止期间用户进行操作 -->
     <div
       class="aiCreatingMask"
       ref="aiCreatingMaskRef"
@@ -78,7 +78,7 @@
       }}</el-button>
     </div>
     <AiConfigDialog v-model="aiConfigDialogVisible"></AiConfigDialog>
-    <!-- AI Continuation -->
+    <!-- AI续写 -->
     <el-dialog
       class="createDialog"
       :title="$t('ai.aiCreatePart')"
@@ -167,12 +167,12 @@ export default {
     this.$bus.$off('showAiConfigDialog', this.showAiConfigDialog)
   },
   methods: {
-    // Show AI configuration modification popup
+    // 显示AI配置修改弹窗
     showAiConfigDialog() {
       this.aiConfigDialogVisible = true
     },
 
-    // Client connection detection
+    // 客户端连接检测
     async testConnect() {
       try {
         await fetch(`http://localhost:${this.aiConfig.port}/ai/test`, {
@@ -187,9 +187,9 @@ export default {
       }
     },
 
-    // Check if AI is available
+    // 检测ai是否可用
     async aiTest() {
-      // Check configuration
+      // 检查配置
       if (
         !(
           this.aiConfig.api &&
@@ -201,7 +201,7 @@ export default {
         this.showAiConfigDialog()
         throw new Error(this.$t('ai.configurationMissing'))
       }
-      // Check connection
+      // 检查连接
       let isConnect = false
       try {
         await fetch(`http://localhost:${this.aiConfig.port}/ai/test`, {
@@ -217,7 +217,7 @@ export default {
       }
     },
 
-    // Generate complete AI content
+    // AI生成整体
     async aiCrateAll() {
       try {
         await this.aiTest()
@@ -227,13 +227,13 @@ export default {
       }
     },
 
-    // Close AI content input popup
+    // 关闭ai内容输入弹窗
     closeAiCreateDialog() {
       this.createDialogVisible = false
       this.aiInput = ''
     },
 
-    // Confirm generation
+    // 确认生成
     doAiCreate() {
       const aiInputText = this.aiInput.trim()
       if (!aiInputText) {
@@ -242,7 +242,7 @@ export default {
       }
       this.closeAiCreateDialog()
       this.aiCreatingMaskVisible = true
-      // Initiate request
+      // 发起请求
       this.isAiCreating = true
       this.aiInstance = new Ai({
         port: this.aiConfig.port
@@ -280,14 +280,14 @@ export default {
       )
     },
 
-    // Data to reset after AI request completes or encounters an error
+    // AI请求完成或出错后需要复位的数据
     resetOnAiCreatingStop() {
       this.aiCreatingMaskVisible = false
       this.isAiCreating = false
       this.aiInstance = null
     },
 
-    // Data to reset after rendering completes
+    // 渲染结束后需要复位的数据
     resetOnRenderEnd() {
       this.isLoopRendering = false
       this.uidMap = {}
@@ -296,7 +296,7 @@ export default {
       this.beingAiCreateNodeUid = ''
     },
 
-    // Stop generation
+    // 停止生成
     stopCreate() {
       this.aiInstance.stop()
       this.isAiCreating = false
@@ -304,7 +304,7 @@ export default {
       this.$message.success(this.$t('ai.stoppedGenerating'))
     },
 
-    // Polling for rendering
+    // 轮询进行渲染
     loopRenderOnAiCreating() {
       if (!this.aiCreatingContent.trim() || this.isLoopRendering) return
       this.isLoopRendering = true
@@ -312,12 +312,12 @@ export default {
       this.addUid(treeData)
       let lastTreeData = JSON.stringify(treeData)
 
-      // Proceed with next render only after current render completes
+      // 在当前渲染完成时再进行下一次渲染
       const onRenderEnd = () => {
-        // Handle nodes outside canvas
+        // 处理超出画布的节点
         this.checkNodeOuter()
 
-        // If generation is complete and data is rendered, unbind events
+        // 如果生成结束数据渲染完毕，那么解绑事件
         if (!this.isAiCreating && !this.aiCreatingContent) {
           this.mindMap.off('node_tree_render_end', onRenderEnd)
           this.latestUid = ''
@@ -326,9 +326,9 @@ export default {
 
         const treeData = transformMarkdownTo(this.aiCreatingContent)
         this.addUid(treeData)
-        // Generation in progress
+        // 正在生成中
         if (this.isAiCreating) {
-          // Don't trigger re-render if data is the same as last time
+          // 如果和上次数据一样则不触发重新渲染
           const curTreeData = JSON.stringify(treeData)
           if (curTreeData === lastTreeData) {
             setTimeout(() => {
@@ -339,8 +339,8 @@ export default {
           lastTreeData = curTreeData
           this.mindMap.updateData(treeData)
         } else {
-          // Generation completed
-          // Trigger one more render to prevent data loss
+          // 已经生成结束
+          // 还要触发一遍渲染，否则会丢失数据
           this.mindMap.updateData(treeData)
           this.resetOnRenderEnd()
           this.$message.success(this.$t('ai.aiGenerationSuccess'))
@@ -351,7 +351,7 @@ export default {
       this.mindMap.setData(treeData)
     },
 
-    // Handle nodes that extend beyond the canvas
+    // 处理超出画布的节点
     checkNodeOuter() {
       if (this.latestUid) {
         const latestNode = this.mindMap.renderer.findNodeByUid(this.latestUid)
@@ -369,7 +369,7 @@ export default {
       }
     },
 
-    // Add uid to AI-generated data
+    // 给AI生成的数据添加uid
     addUid(data) {
       const checkRepeatUidMap = {}
       const walk = (node, pUid = '') => {
@@ -377,10 +377,10 @@ export default {
           node.data = {}
         }
         if (isUndef(node.data.uid)) {
-          // Reuse uid from last generation based on pUid + text content
+          // 根据pUid+文本内容来复用上一次生成数据的uid
           const key = pUid + '-' + node.data.text
           node.data.uid = this.uidMap[key] || createUid()
-          // If current uid is duplicate, regenerate. Rare case but just in case
+          // 当前uid和之前的重复，那么重新生成一个。这种情况很少，但是以防万一
           if (checkRepeatUidMap[node.data.uid]) {
             node.data.uid = createUid()
           }
@@ -396,11 +396,11 @@ export default {
       walk(data)
     },
 
-    // Show AI continuation popup
+    // 显示AI续写弹窗
     showAiCreatePartDialog(node) {
       this.beingCreatePartNode = node
       const currentMindMapData = this.mindMap.getData()
-      // Fill default content
+      // 填充默认内容
       this.aiPartInput = `${this.$t(
         'ai.aiCreatePartMsgPrefix'
       )}${getStrWithBrFromHtml(currentMindMapData.data.text)}${this.$t(
@@ -411,25 +411,25 @@ export default {
       this.createPartDialogVisible = true
     },
 
-    // Close AI continuation popup
+    // 关闭AI续写弹窗
     closeAiCreatePartDialog() {
       this.createPartDialogVisible = false
     },
 
-    // Reset AI continuation popup data
+    // 复位AI续写弹窗数据
     resetAiCreatePartDialog() {
       this.beingCreatePartNode = null
       this.aiPartInput = ''
     },
 
-    // Confirm AI continuation
+    // 确认AI续写
     confirmAiCreatePart() {
       if (!this.aiPartInput.trim()) return
       this.closeAiCreatePartDialog()
       this.aiCreatePart()
     },
 
-    // Generate partial AI content
+    // AI生成部分
     async aiCreatePart() {
       try {
         if (!this.beingCreatePartNode) {
@@ -440,7 +440,7 @@ export default {
         const currentMindMapData = this.mindMap.getData()
         this.mindMapDataCache = JSON.stringify(currentMindMapData)
         this.aiCreatingMaskVisible = true
-        // Initiate request
+        // 发起请求
         this.isAiCreating = true
         this.aiInstance = new Ai({
           port: this.aiConfig.port
@@ -481,7 +481,7 @@ export default {
       }
     },
 
-    // Add generated data to specified node
+    // 将生成的数据添加到指定节点上
     addToTargetNode(newChildren = []) {
       const initData = JSON.parse(this.mindMapDataCache)
       const walk = node => {
@@ -502,7 +502,7 @@ export default {
       return initData
     },
 
-    // Polling for partial rendering
+    // 轮询进行部分渲染
     loopRenderOnAiCreatingPart() {
       if (!this.aiCreatingContent.trim() || this.isLoopRendering) return
       this.isLoopRendering = true
@@ -511,12 +511,12 @@ export default {
       let lastPartData = JSON.stringify(partData)
       const treeData = this.addToTargetNode(partData.children || [])
 
-      // Proceed with next render only after current render completes
+      // 在当前渲染完成时再进行下一次渲染
       const onRenderEnd = () => {
-        // Handle nodes outside canvas
+        // 处理超出画布的节点
         this.checkNodeOuter()
 
-        // If generation is complete and data is rendered, unbind events
+        // 如果生成结束数据渲染完毕，那么解绑事件
         if (!this.isAiCreating && !this.aiCreatingContent) {
           this.mindMap.off('node_tree_render_end', onRenderEnd)
           this.latestUid = ''
@@ -528,7 +528,7 @@ export default {
         const treeData = this.addToTargetNode(partData.children || [])
 
         if (this.isAiCreating) {
-          // Don't trigger re-render if data is the same as last time
+          // 如果和上次数据一样则不触发重新渲染
           const curPartData = JSON.stringify(partData)
           if (curPartData === lastPartData) {
             setTimeout(() => {
@@ -545,11 +545,11 @@ export default {
         }
       }
       this.mindMap.on('node_tree_render_end', onRenderEnd)
-      // For continuation, use updateData method for first render as well
+      // 因为是续写，所以首次也直接使用updateData方法渲染
       this.mindMap.updateData(treeData)
     },
 
-    // AI Chat
+    // AI对话
     async aiChat(
       messageList = [],
       progress = () => {},
@@ -558,7 +558,7 @@ export default {
     ) {
       try {
         await this.aiTest()
-        // Initiate request
+        // 发起请求
         this.isAiCreating = true
         this.aiInstance = new Ai({
           port: this.aiConfig.port
@@ -588,7 +588,7 @@ export default {
       }
     },
 
-    // Stop AI Chat
+    // AI对话停止
     aiChatStop() {
       if (this.aiInstance) {
         this.aiInstance.stop()

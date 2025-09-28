@@ -28,7 +28,7 @@ const initApp = () => {
   }).$mount('#app')
 }
 
-// 是否处于接管应用模式
+// Whether in takeover app mode // 是否处于接管应用模式
 if (window.takeOverApp) {
   window.initApp = initApp
   window.$bus = bus

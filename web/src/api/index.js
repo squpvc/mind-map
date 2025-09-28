@@ -10,14 +10,14 @@ const SIMPLE_MIND_MAP_LOCAL_CONFIG = 'SIMPLE_MIND_MAP_LOCAL_CONFIG'
 
 let mindMapData = null
 
-// Get cached mind map data
+// Get cached mind map data // 获取缓存的思维导图数据
 export const getData = () => {
-  // Takeover mode
+  // Takeover app mode // 接管模式
   if (window.takeOverApp) {
     mindMapData = window.takeOverAppMethods.getMindMapData()
     return mindMapData
   }
-  // Local file operation mode
+  // Handle local file mode // 操作本地文件模式
   if (vuexStore.state.isHandleLocalFile) {
     return Vue.prototype.getCurrentData()
   }
@@ -33,7 +33,7 @@ export const getData = () => {
   }
 }
 
-// Store mind map data
+// Store mind map data // 存储思维导图数据
 export const storeData = data => {
   try {
     let originData = null
@@ -67,7 +67,7 @@ export const storeData = data => {
   }
 }
 
-// Get mind map configuration data
+// Get mind map config data // 获取思维导图配置数据
 export const getConfig = () => {
   if (window.takeOverApp) {
     window.takeOverAppMethods.getMindMapConfig()
@@ -80,7 +80,7 @@ export const getConfig = () => {
   return null
 }
 
-// Store mind map configuration data
+// Store mind map config data // 存储思维导图配置数据
 export const storeConfig = config => {
   try {
     if (window.takeOverApp) {
@@ -93,7 +93,7 @@ export const storeConfig = config => {
   }
 }
 
-// Store language
+// Store language // 存储语言
 export const storeLang = lang => {
   if (window.takeOverApp) {
     window.takeOverAppMethods.saveLanguage(lang)
@@ -102,20 +102,20 @@ export const storeLang = lang => {
   localStorage.setItem(SIMPLE_MIND_MAP_LANG, lang)
 }
 
-// Get stored language
+// Get stored language // 获取存储的语言
 export const getLang = () => {
   if (window.takeOverApp) {
-    return window.takeOverAppMethods.getLanguage() || 'en'
+    return window.takeOverAppMethods.getLanguage() || 'zh'
   }
   let lang = localStorage.getItem(SIMPLE_MIND_MAP_LANG)
   if (lang) {
     return lang
   }
-  storeLang('en')
-  return 'en'
+  storeLang('zh')
+  return 'zh'
 }
 
-// Store local configuration
+// Store local config // 存储本地配置
 export const storeLocalConfig = config => {
   if (window.takeOverApp) {
     return window.takeOverAppMethods.saveLocalConfig(config)
@@ -123,7 +123,7 @@ export const storeLocalConfig = config => {
   localStorage.setItem(SIMPLE_MIND_MAP_LOCAL_CONFIG, JSON.stringify(config))
 }
 
-// Get local configuration
+// Get local config // 获取本地配置
 export const getLocalConfig = () => {
   if (window.takeOverApp) {
     return window.takeOverAppMethods.getLocalConfig()

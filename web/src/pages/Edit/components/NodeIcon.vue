@@ -27,7 +27,7 @@
 import { nodeIconList } from 'simple-mind-map/src/svg/icons'
 import icon from '@/config/icon'
 
-// Node icon content settings
+// 节点图标内容设置
 export default {
   data() {
     return {
@@ -69,18 +69,18 @@ export default {
       let index = this.iconList.findIndex(item => {
         return item === key
       })
-      // Delete icon
+      // 删除icon
       if (index !== -1) {
         this.iconList.splice(index, 1)
       } else {
         let typeIndex = this.iconList.findIndex(item => {
           return item.split('_')[0] === type
         })
-        // Replace icon
+        // 替换icon
         if (typeIndex !== -1) {
           this.iconList.splice(typeIndex, 1, key)
         } else {
-          // Add icon
+          // 增加icon
           this.iconList.push(key)
         }
       }

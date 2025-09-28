@@ -5,9 +5,9 @@
       :class="{ isDark: isDark }"
       v-if="configData"
     >
-      <!-- Watermark -->
+      <!-- 水印 -->
       <div class="row">
-        <!-- Whether to show watermark -->
+        <!-- 是否显示水印 -->
         <div class="rowItem">
           <el-checkbox
             v-model="watermarkConfig.show"
@@ -17,7 +17,7 @@
         </div>
       </div>
       <template v-if="watermarkConfig.show">
-        <!-- Only show when exporting -->
+        <!-- 是否仅在导出时显示 -->
         <div class="row">
           <div class="rowItem">
             <el-checkbox
@@ -27,7 +27,7 @@
             >
           </div>
         </div>
-        <!-- Below node -->
+        <!-- 是否在节点下方 -->
         <div class="row">
           <div class="rowItem">
             <el-checkbox
@@ -37,7 +37,7 @@
             >
           </div>
         </div>
-        <!-- Watermark text -->
+        <!-- 水印文字 -->
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('setting.watermarkText') }}</span>
@@ -49,7 +49,7 @@
             ></el-input>
           </div>
         </div>
-        <!-- Watermark text color -->
+        <!-- 水印文字颜色 -->
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('setting.watermarkTextColor') }}</span>
@@ -71,7 +71,7 @@
             </el-popover>
           </div>
         </div>
-        <!-- Watermark text opacity -->
+        <!-- 水印文字透明度 -->
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('setting.watermarkTextOpacity') }}</span>
@@ -85,7 +85,7 @@
             ></el-slider>
           </div>
         </div>
-        <!-- Watermark text font size -->
+        <!-- 水印文字字号 -->
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('setting.watermarkTextFontSize') }}</span>
@@ -100,7 +100,7 @@
             ></el-input-number>
           </div>
         </div>
-        <!-- Rotation angle -->
+        <!-- 旋转角度 -->
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('setting.watermarkAngle') }}</span>
@@ -115,7 +115,7 @@
             ></el-input-number>
           </div>
         </div>
-        <!-- Watermark line spacing -->
+        <!-- 水印行间距 -->
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('setting.watermarkLineSpacing') }}</span>
@@ -128,7 +128,7 @@
             ></el-input-number>
           </div>
         </div>
-        <!-- Watermark text spacing -->
+        <!-- 水印文字间距 -->
         <div class="row">
           <div class="rowItem">
             <span class="name">{{ $t('setting.watermarkTextSpacing') }}</span>
@@ -142,7 +142,7 @@
           </div>
         </div>
       </template>
-      <!-- Configure performance mode -->
+      <!-- 配置性能模式 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -156,7 +156,7 @@
           >
         </div>
       </div>
-      <!-- Enable free drag -->
+      <!-- 配置开启自由拖拽 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -170,7 +170,7 @@
           >
         </div>
       </div>
-      <!-- Enable rich text editing -->
+      <!-- 配置是否启用富文本编辑 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -180,7 +180,7 @@
           >
         </div>
       </div>
-      <!-- Update node size in real-time during text editing -->
+      <!-- 是否开启文本编辑时实时更新节点大小 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -192,7 +192,7 @@
           >
         </div>
       </div>
-      <!-- Show scrollbar -->
+      <!-- 是否显示滚动条 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -202,7 +202,7 @@
           >
         </div>
       </div>
-      <!-- Always show expand/collapse buttons -->
+      <!-- 是否一直显示展开收起按钮 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -212,7 +212,7 @@
           >
         </div>
       </div>
-      <!-- Auto-enter text edit mode on keyboard input -->
+      <!-- 是否在键盘输入时自动进入节点文本编辑模式 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -224,7 +224,7 @@
           >
         </div>
       </div>
-      <!-- Enable file import via drag and drop -->
+      <!-- 是否开启文件拖入页面导入的方式 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -234,7 +234,7 @@
           >
         </div>
       </div>
-      <!-- Allow node connection style to inherit from ancestors -->
+      <!-- 节点连线样式是否允许继承祖先的连线样式 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -246,7 +246,7 @@
           >
         </div>
       </div>
-      <!-- Enable AI features -->
+      <!-- 是否开启ai功能 -->
       <div class="row">
         <div class="rowItem">
           <el-checkbox
@@ -256,7 +256,7 @@
           >
         </div>
       </div>
-      <!-- Configure mouse wheel behavior -->
+      <!-- 配置鼠标滚轮行为 -->
       <div class="row">
         <div class="rowItem">
           <span class="name">{{ $t('setting.mousewheelAction') }}</span>
@@ -279,7 +279,7 @@
           </el-select>
         </div>
       </div>
-      <!-- Configure mouse zoom behavior -->
+      <!-- 配置鼠标缩放行为 -->
       <div class="row" v-if="config.mousewheelAction === 'zoom'">
         <div class="rowItem">
           <span class="name">{{
@@ -307,7 +307,7 @@
           </el-select>
         </div>
       </div>
-      <!-- Behavior when creating new nodes -->
+      <!-- 配置创建新节点时的行为 -->
       <div class="row">
         <div class="rowItem">
           <span class="name">{{ $t('setting.createNewNodeBehavior') }}</span>
@@ -337,7 +337,7 @@
           </el-select>
         </div>
       </div>
-      <!-- Spacing between images and text -->
+      <!-- 图片和文本内容的间距 -->
       <div class="row">
         <div class="rowItem">
           <span class="name">{{ $t('setting.imgTextMargin') }}</span>
@@ -352,7 +352,7 @@
           ></el-slider>
         </div>
       </div>
-      <!-- Spacing between text elements -->
+      <!-- 文本各内容的间距 -->
       <div class="row">
         <div class="rowItem">
           <span class="name">{{ $t('setting.textContentMargin') }}</span>
@@ -456,7 +456,7 @@ export default {
   methods: {
     ...mapMutations(['setLocalConfig']),
 
-    // Initialize other configurations
+    // 初始化其他配置
     initConfig() {
       Object.keys(this.config).forEach(key => {
         if (typeof this.config[key] === 'object') {
@@ -469,7 +469,7 @@ export default {
       })
     },
 
-    // Initialize local configuration
+    // 初始化本地配置
     initLoacalConfig() {
       this.enableNodeRichText = this.localConfig.openNodeRichText
       this.mousewheelAction = this.localConfig.mousewheelAction
@@ -479,7 +479,7 @@ export default {
       })
     },
 
-    // Initialize watermark configuration
+    // 初始化水印配置
     initWatermark() {
       const config = this.mindMap.getConfig('watermarkConfig')
       ;['text', 'lineSpacing', 'textSpacing', 'angle', 'onlyExport'].forEach(
@@ -491,7 +491,7 @@ export default {
       this.watermarkConfig.textStyle = { ...config.textStyle }
     },
 
-    // Update other configurations
+    // 更新其他配置
     updateOtherConfig(key, value) {
       this.mindMap.updateConfig({
         [key]: value
@@ -510,7 +510,7 @@ export default {
       }
     },
 
-    // Update watermark configuration
+    // 更新水印配置
     updateWatermarkConfig() {
       clearTimeout(this.updateWatermarkTimer)
       this.updateWatermarkTimer = setTimeout(() => {
@@ -525,7 +525,7 @@ export default {
       }, 300)
     },
 
-    // Toggle watermark visibility
+    // 切换显示水印与否
     watermarkShowChange(value) {
       if (value) {
         let text =
@@ -537,7 +537,7 @@ export default {
       this.updateWatermarkConfig()
     },
 
-    // Toggle rich text editing for nodes
+    // 切换是否开启节点富文本编辑
     enableNodeRichTextChange(e) {
       this.$confirm(
         this.$t('setting.changeRichTextTip'),
@@ -568,7 +568,7 @@ export default {
       this.enableNodeRichText = val
     },
 
-    // Local configuration
+    // 本地配置
     updateLocalConfig(key, value) {
       this.setLocalConfig({
         [key]: value

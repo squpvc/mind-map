@@ -24,7 +24,7 @@ import Sidebar from './Sidebar.vue'
 import { shortcutKeyList } from '@/config'
 import { mapState } from 'vuex'
 
-// Shortcut Keys
+// 快捷键
 export default {
   components: {
     Sidebar

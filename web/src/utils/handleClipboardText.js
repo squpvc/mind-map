@@ -1,6 +1,6 @@
 import { imgToDataUrl } from 'simple-mind-map/src/utils/index'
 
-// Process Zhixi format
+// Handle ZhiXi format // 处理知犀
 const handleZHIXI = async data => {
   try {
     try {
@@ -26,7 +26,7 @@ const handleZHIXI = async data => {
           hyperlinkTitle: item.data.hyperlinkTitle,
           note: item.data.note
         }
-        // Image
+        // Image // 图片
         if (item.data.image) {
           let resolve = null
           let promise = new Promise(_resolve => {
@@ -41,12 +41,12 @@ const handleZHIXI = async data => {
             resolve()
           }
         }
-        // Child nodes
+        // Child node // 子节点
         newRoot.children = []
         if (item.children && item.children.length > 0) {
           const children = []
           item.children.forEach(item2 => {
-            // Summary
+            // Summary // 概要
             if (item2.data.type === 'generalize') {
               newRoot.data.generalization = [
                 {
@@ -73,7 +73,7 @@ const handleZHIXI = async data => {
 }
 
 const handleClipboardText = async text => {
-  // Zhixi data format 1
+  // ZhiXi data format 1 // 知犀数据格式1
   try {
     let parsedData = JSON.parse(text)
     if (parsedData.__c_zx_v !== undefined) {
@@ -81,7 +81,7 @@ const handleClipboardText = async text => {
       return res
     }
   } catch (error) {}
-  // Zhixi data format 2
+  // ZhiXi data format 2 // 知犀数据格式2
   if (text.includes('￿﻿')) {
     const res = await handleZHIXI(text)
     return res

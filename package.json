@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "element-plus": "^2.10.4",
     "simple-mind-map": "^0.14.0-fix.1"
   }
 }

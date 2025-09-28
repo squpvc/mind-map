@@ -1,4 +1,4 @@
-// Fullscreen event detection
+// Fullscreen event detection // 全屏事件检测
 const getOnfullscreEnevt = () => {
   if (document.documentElement.requestFullScreen) {
     return 'onfullscreenchange'
@@ -13,7 +13,7 @@ const getOnfullscreEnevt = () => {
 
 export const fullscrrenEvent = getOnfullscreEnevt()
 
-// Fullscreen
+// 全屏
 export const fullScreen = element => {
   if (element.requestFullScreen) {
     element.requestFullScreen()
@@ -24,7 +24,7 @@ export const fullScreen = element => {
   }
 }
 
-// Convert file to buffer
+// Convert file to buffer // 文件转buffer
 export const fileToBuffer = file => {
   return new Promise(r => {
     const reader = new FileReader()
@@ -35,9 +35,9 @@ export const fileToBuffer = file => {
   })
 }
 
-// Copy text to clipboard
+// Copy text to clipboard // 复制文本到剪贴板
 export const copy = text => {
-  // Using textarea preserves line breaks
+  // Using textarea preserves line breaks // 使用textarea可以保留换行
   const input = document.createElement('textarea')
   // input.setAttribute('value', text)
   input.innerHTML = text
@@ -47,14 +47,14 @@ export const copy = text => {
   document.body.removeChild(input)
 }
 
-// Copy text to clipboard
+// Copy text to clipboard // 复制文本到剪贴板
 export const setDataToClipboard = data => {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(data)
   }
 }
 
-// Copy image to clipboard
+// Copy image to clipboard // 复制图片到剪贴板
 export const setImgToClipboard = img => {
   if (navigator.clipboard && navigator.clipboard.write) {
     const data = [new ClipboardItem({ ['image/png']: img })]
@@ -62,21 +62,21 @@ export const setImgToClipboard = img => {
   }
 }
 
-// Print outline
+// Print outline // 打印大纲
 export const printOutline = el => {
   const printContent = el.outerHTML
   const iframe = document.createElement('iframe')
   iframe.setAttribute('style', 'position: absolute; width: 0; height: 0;')
   document.body.appendChild(iframe)
   const iframeDoc = iframe.contentWindow.document
-  // Add all styles from current page to iframe
+  // Add all styles from the current page to the iframe // 将当前页面的所有样式添加到iframe中
   const styleList = document.querySelectorAll('style')
   Array.from(styleList).forEach(el => {
     iframeDoc.write(el.outerHTML)
   })
-  // Set print display mode - portrait orientation
+  // Set print display mode - portrait // 设置打印展示方式 - 纵向展示
   iframeDoc.write('<style media="print">@page {size: portrait;}</style>')
-  // Write content
+  // Write content // 写入内容
   iframeDoc.write('<div>' + printContent + '</div>')
   setTimeout(function() {
     iframe.contentWindow?.print()

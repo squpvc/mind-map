@@ -62,7 +62,7 @@ import markdown from 'simple-mind-map/src/parse/markdown.js'
 import { mapMutations } from 'vuex'
 import Vue from 'vue'
 
-// Import
+// 导入
 export default {
   data() {
     return {
@@ -108,7 +108,7 @@ export default {
       return new RegExp(`\.(smm|json|xmind|md)$`)
     },
 
-    // Check if the URL contains a file to open
+    // 检查url中是否操作需要打开的文件
     async handleFileURL() {
       try {
         const fileURL = this.$route.query.fileURL
@@ -135,7 +135,7 @@ export default {
       }
     },
 
-    // File selection
+    // 文件选择
     onChange(file) {
       if (!this.getRegexp().test(file.name)) {
         this.$message.error(
@@ -149,22 +149,22 @@ export default {
       }
     },
 
-    // Remove file
+    // 移除文件
     onRemove(file, fileList) {
       this.fileList = fileList
     },
 
-    // Exceeded file limit
+    // 数量超出限制
     onExceed() {
       this.$message.error(this.$t('import.maxFileNum'))
     },
 
-    // Cancel
+    // 取消
     cancel() {
       this.dialogVisible = false
     },
 
-    // Confirm
+    // 确定
     confirm() {
       if (this.fileList.length <= 0) {
         return this.$message.error(this.$t('import.notSelectTip'))
@@ -182,7 +182,7 @@ export default {
       this.setActiveSidebar(null)
     },
 
-    // Handle .smm file
+    // 处理.smm文件
     handleSmm(file) {
       let fileReader = new FileReader()
       fileReader.readAsText(file.raw)
@@ -201,7 +201,7 @@ export default {
       }
     },
 
-    // Handle .xmind file
+    // 处理.xmind文件
     async handleXmind(file) {
       try {
         let data = await xmind.parseXmindFile(file.raw, content => {
@@ -218,14 +218,14 @@ export default {
       }
     },
 
-    // Show canvas selection dialog for xmind files with multiple canvases
+    // 显示xmind文件的多个画布选择弹窗
     showSelectXmindCanvasDialog(content) {
       this.canvasList = content
       this.selectCanvas = 0
       this.xmindCanvasSelectDialogVisible = true
     },
 
-    // Confirm import of selected canvas
+    // 确认导入指定的画布
     confirmSelect() {
       this.selectPromiseResolve(this.canvasList[this.selectCanvas])
       this.xmindCanvasSelectDialogVisible = false
@@ -233,7 +233,7 @@ export default {
       this.selectCanvas = 0
     },
 
-    // Handle markdown file
+    // 处理markdown文件
     async handleMd(file) {
       let fileReader = new FileReader()
       fileReader.readAsText(file.raw)
@@ -249,7 +249,7 @@ export default {
       }
     },
 
-    // Import specified file
+    // 导入指定文件
     handleImportFile(file) {
       this.onChange({
         raw: file,
@@ -263,6 +263,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.nodeImportDialog {
+}
+
 .canvasList {
   display: flex;
   flex-direction: column;

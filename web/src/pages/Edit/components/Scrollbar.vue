@@ -1,6 +1,6 @@
 <template>
   <div class="scrollbarContainer" :class="{ isDark: isDark }">
-    <!-- Vertical -->
+    <!-- 竖向 -->
     <div
       class="scrollbar verticalScrollbar"
       ref="verticalScrollbarRef"
@@ -13,7 +13,7 @@
         @mousedown="onVerticalScrollbarMousedown"
       ></div>
     </div>
-    <!-- Horizontal -->
+    <!-- 横向 -->
     <div
       class="scrollbar horizontalScrollbar"
       ref="horizontalScrollbarRef"
@@ -61,7 +61,7 @@ export default {
     window.removeEventListener('resize', this.onResize)
   },
   methods: {
-    // Pass scrollbar width and height data to the plugin
+    // 向插件传递滚动条宽高数据
     setScrollBarWrapSize() {
       if (!this.mindMap.scrollbar) return
       const {
@@ -71,7 +71,7 @@ export default {
       this.mindMap.scrollbar.setScrollBarWrapSize(width, height)
     },
 
-    // Window resize
+    // 窗口尺寸变化
     onResize() {
       clearTimeout(this.resizeTimer)
       this.resizeTimer = setTimeout(() => {
@@ -79,7 +79,7 @@ export default {
       }, 300)
     },
 
-    // Call plugin method to update scrollbar position and size
+    // 调用插件方法更新滚动条位置和大小
     updateScrollbar({ vertical, horizontal }) {
       this.verticalScrollbarStyle = {
         top: vertical.top + '%',
@@ -91,22 +91,22 @@ export default {
       }
     },
 
-    // Call plugin method for vertical scrollbar mousedown event
+    // 垂直滚动条按下事件调用插件方法
     onVerticalScrollbarMousedown(e) {
       this.mindMap.scrollbar.onMousedown(e, 'vertical')
     },
 
-    // Call plugin method for vertical scrollbar click event
+    // 垂直滚动条点击事件调用插件方法
     onVerticalScrollbarClick(e) {
       this.mindMap.scrollbar.onClick(e, 'vertical')
     },
 
-    // Call plugin method for horizontal scrollbar mousedown event
+    // 水平滚动条按下事件调用插件方法
     onHorizontalScrollbarMousedown(e) {
       this.mindMap.scrollbar.onMousedown(e, 'horizontal')
     },
 
-    // Call plugin method for horizontal scrollbar click event
+    // 水平滚动条点击事件调用插件方法
     onHorizontalScrollbarClick(e) {
       this.mindMap.scrollbar.onClick(e, 'horizontal')
     }

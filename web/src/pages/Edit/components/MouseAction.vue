@@ -22,7 +22,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 
-// Mouse action settings
+// 鼠标操作设置
 export default {
   props: {
     mindMap: {

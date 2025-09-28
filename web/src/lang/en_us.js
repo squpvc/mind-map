@@ -1,4 +1,7 @@
 export default {
+  app: {
+    title: 'Mind Map'
+  },
   baseStyle: {
     title: 'BaseStyle',
     background: 'Background',
@@ -471,6 +474,12 @@ export default {
     placeholder: 'Please enter the tag content',
     delete: 'Delete this tag'
   },
+  imgUpload: {
+    uploadPrompt: 'Click here to select an image or drag and drop it here'
+  },
+  common: {
+    rootNode: 'Root Node'
+  },
   ai: {
     chatTitle: 'AI dialogue',
     clearRecords: 'Clear records',
@@ -531,6 +540,10 @@ export default {
     aiCreatePartMsgHelp:
       '. Needs to be returned in Markdown format and can only use two syntax: Markdown title and unordered list. It can support multi-level nesting. Just return the content.',
     aiCreatePart: 'AI Continuation'
+  },
+  doc: {
+    documentHasBeenMigrated: 'Document has been migrated to:',
+    newAddress: 'New Address'
   },
   note: {
     title: 'Note'

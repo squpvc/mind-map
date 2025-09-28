@@ -6,157 +6,97 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    isHandleLocalFile: false, // Whether operating on a local file
+    isHandleLocalFile: false, // Whether operating on local files // 是否操作的是本地文件
     localConfig: {
-      // Local configuration
-      isZenMode: false, // Whether in zen mode
-      // Whether to enable rich text for nodes
+      // Local configuration // 本地配置
+      isZenMode: false, // Whether in zen mode // 是否是禅模式
+      // Whether to enable rich text for nodes // 是否开启节点富文本
       openNodeRichText: true,
-      // Mouse behavior
+      // Mouse behavior // 鼠标行为
       useLeftKeySelectionRightKeyDrag: false,
-      // Whether to show scrollbar
+      // Whether to show scrollbar // 是否显示滚动条
       isShowScrollbar: false,
-      // Whether in dark mode
+      // Whether in dark mode // 是否是暗黑模式
       isDark: false,
-      // Whether to enable AI features
+      // Whether to enable AI features // 是否开启AI功能
       enableAi: true
     },
-    activeSidebar: '', // Currently displayed sidebar
-    isOutlineEdit: false, // Whether in outline edit mode
-    isReadonly: false, // Whether read-only
-    isSourceCodeEdit: false, // Whether in source code edit mode
-    extraTextOnExport: '', // Text added at the bottom when exporting
-    isDragOutlineTreeNode: false, // Whether currently dragging a node in the outline tree
+    activeSidebar: '', // Currently displayed sidebar // 当前显示的侧边栏
+    isOutlineEdit: false, // Whether in outline edit mode // 是否是大纲编辑模式
+    isReadonly: false, // Whether read-only // 是否只读
+    isSourceCodeEdit: false, // Whether in source code edit mode // 是否是源码编辑模式
+    extraTextOnExport: '', // Text added at the bottom when exporting // 导出时底部添加的文字
+    isDragOutlineTreeNode: false, // Whether currently dragging a node in the outline tree // 当前是否正在拖拽大纲树的节点
     aiConfig: {
-      // Provider can be 'volcano', 'openai', or 'deepseek'
-      provider: 'volcano',
-      // Common settings
-      apiKey: '',
+      api: 'http://ark.cn-beijing.volces.com/api/v3/chat/completions',
+      key: '',
       model: '',
       port: 3456,
-      // Provider-specific settings
-      providers: {
-        volcano: {
-          api: 'http://ark.cn-beijing.volces.com/api/v3/chat/completions',
-          method: 'POST',
-          availableModels: [
-            { id: 'volc-ark', name: 'Volcano Ark' },
-            { id: 'volc-ark-2.0', name: 'Volcano Ark 2.0' }
-          ]
-        },
-        openai: {
-          api: 'https://api.openai.com/v1/chat/completions',
-          method: 'POST',
-          availableModels: [
-            { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
-            { id: 'gpt-4', name: 'GPT-4' },
-            { id: 'gpt-4-turbo', name: 'GPT-4 Turbo' }
-          ]
-        },
-        deepseek: {
-          api: 'https://api.deepseek.com/v1/chat/completions',
-          method: 'POST',
-          availableModels: [
-            { id: 'deepseek-chat', name: 'DeepSeek Chat' },
-            { id: 'deepseek-coder', name: 'DeepSeek Coder' }
-          ]
-        }
-      },
-      // Generation settings
-      temperature: 0.7,
-      maxTokens: 2000,
-      topP: 1,
-      frequencyPenalty: 0,
-      presencePenalty: 0
+      method: 'POST'
     },
-    // Extended theme list
+    // Extension theme list // 扩展主题列表
     extendThemeGroupList: [],
-    // Built-in background images
+    // Built-in background images // 内置背景图片
     bgList: []
   },
   mutations: {
-    // Set flag for operating on local file
+    // Set the flag for operating local files // 设置操作本地文件标志位
     setIsHandleLocalFile(state, data) {
       state.isHandleLocalFile = data
     },
 
-    // Set local configuration
+    // Set local configuration // 设置本地配置
     setLocalConfig(state, data) {
       const aiConfigKeys = Object.keys(state.aiConfig)
-      const providerConfigKeys = ['provider', 'apiKey', 'model', 'temperature', 'maxTokens', 'topP', 'frequencyPenalty', 'presencePenalty']
-      
       Object.keys(data).forEach(key => {
         if (aiConfigKeys.includes(key)) {
-          // Handle direct AI config updates
-          state.aiConfig[key] = data[key]
-        } else if (providerConfigKeys.includes(key)) {
-          // Handle AI provider config updates
           state.aiConfig[key] = data[key]
         } else {
           state.localConfig[key] = data[key]
         }
       })
-      
-      // Save to local storage
       storeLocalConfig({
         ...state.localConfig,
-        aiConfig: state.aiConfig
-      })
-    },
-    
-    // Update AI configuration
-    updateAiConfig(state, { key, value }) {
-      if (key in state.aiConfig) {
-        state.aiConfig[key] = value
-      } else if (key === 'provider' && state.aiConfig.providers[value]) {
-        // When changing provider, update the model to the first available model for that provider
-        state.aiConfig.provider = value
-        state.aiConfig.model = state.aiConfig.providers[value].availableModels[0]?.id || ''
-      }
-      
-      // Save to local storage
-      storeLocalConfig({
-        ...state.localConfig,
-        aiConfig: state.aiConfig
+        ...state.aiConfig
       })
     },
 
-    // Set currently displayed sidebar
+    // Set currently displayed sidebar // 设置当前显示的侧边栏
     setActiveSidebar(state, data) {
       state.activeSidebar = data
     },
 
-    // Set outline edit mode
+    // Set outline edit mode // 设置大纲编辑模式
     setIsOutlineEdit(state, data) {
       state.isOutlineEdit = data
     },
 
-    // Set read-only mode
+    // Set read-only mode // 设置是否只读
     setIsReadonly(state, data) {
       state.isReadonly = data
     },
 
-    // Set source code edit mode
+    // Set source code edit mode // 设置源码编辑模式
     setIsSourceCodeEdit(state, data) {
       state.isSourceCodeEdit = data
     },
 
-    // Set text to add at bottom when exporting
+    // Set text added at the bottom when exporting // 设置导出时底部添加的文字
     setExtraTextOnExport(state, data) {
       state.extraTextOnExport = data
     },
 
-    // Set tree node dragging
+    // Set tree node dragging // 设置树节点拖拽
     setIsDragOutlineTreeNode(state, data) {
       state.isDragOutlineTreeNode = data
     },
 
-    // Extended theme list
+    // Set extension theme list // 扩展主题列表
     setExtendThemeGroupList(state, data) {
       state.extendThemeGroupList = data
     },
 
-    // Set background image list
+    // Set background image list // 设置背景图片列表
     setBgList(state, data) {
       state.bgList = data
     }

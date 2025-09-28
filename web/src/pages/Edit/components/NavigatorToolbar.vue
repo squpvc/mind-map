@@ -138,7 +138,7 @@ import { mapState, mapMutations } from 'vuex'
 import pkg from 'simple-mind-map/package.json'
 import Demonstrate from './Demonstrate.vue'
 
-// Navigator toolbar
+// 导航器工具栏
 export default {
   components: {
     Scale,

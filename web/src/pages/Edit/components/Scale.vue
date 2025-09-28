@@ -32,7 +32,7 @@
 </template>
 
 <script>
-// Zoom in/out
+// 放大缩小
 export default {
   props: {
     mindMap: {
@@ -62,32 +62,32 @@ export default {
     this.mindMap.off('draw_click', this.onDrawClick)
   },
   methods: {
-    // Convert to percentage
+    // 转换成百分数
     toPer(scale) {
       return (scale * 100).toFixed(0)
     },
 
-    // Zoom out
+    // 缩小
     narrow() {
       this.mindMap.view.narrow()
     },
 
-    // Zoom in
+    // 放大
     enlarge() {
       this.mindMap.view.enlarge()
     },
 
-    // Cache current zoom level when focusing
+    // 聚焦时缓存当前缩放倍数
     onScaleNumInputFocus() {
       this.cacheScaleNum = this.scaleNum
     },
 
-    // Only allow number input
+    // 禁止输入非数字
     onScaleNumInput() {
       this.scaleNum = this.scaleNum.replace(/[^0-9]+/g, '')
     },
 
-    // Manually input zoom level
+    // 手动输入缩放倍数
     onScaleNumChange() {
       const scaleNum = Number(this.scaleNum)
       if (Number.isNaN(scaleNum) || scaleNum <= 0) {

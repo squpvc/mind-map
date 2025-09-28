@@ -1,4 +1,4 @@
-// Font list
+// 字体列表
 export const fontFamilyList = [
   {
     name: 'Song Ti',
@@ -459,7 +459,7 @@ export const sidebarTriggerList = [
 // 下载类型列表
 export const downTypeList = [
   {
-    name: 'Mind Map File',
+    name: '思绪 file',
     type: 'smm',
     icon: 'iconwenjian',
     desc:
